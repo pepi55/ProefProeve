@@ -6,18 +6,18 @@ Proef PvB
  * Enter Bracket
  * No public variables, use properties.
  Auto generated:
-    public _Variable_ { get; set; }
+        public _Variable_ { get; set; }
  User generated:
-    private _variable_;
-    public _Variable_
-    {
-        get
+        private _variable_;
+        public _Variable_
         {
-            return value;
-        }
+            get
+            {
+                return value;
+            }
 
-        set
-        {
-            variable = value;
+            set
+            {
+                variable = value;
+            }
         }
-    }
