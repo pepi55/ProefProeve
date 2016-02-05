@@ -27,3 +27,6 @@ Proef PvB
      }
  }
  ```
+ * Initialization on one line. (i.e. `[SerializeField] private int variable;`)
+ * Unity methods are protected. (i.e. `protected void Awake()`)
+ * `Awake()` is for initialization, `Start()` is for assigning variables.
