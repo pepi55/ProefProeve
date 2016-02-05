@@ -7,12 +7,14 @@ Proef PvB
  * No public variables, use properties.
  
  Auto generated:
- `public _Variable_ { get; set; }`
+ ```C#
+ public int Variable { get; set; }
+ ```
  
  User generated:
- ```
- private _variable_;
- public _Variable_
+ ```C#
+ private int _variable_;
+ public int _Variable_
  {
      get
      {
