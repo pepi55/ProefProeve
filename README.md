@@ -30,3 +30,6 @@ Proef PvB
  * Initialization on one line. (i.e. `[SerializeField] private int variable;`)
  * Unity methods are protected. (i.e. `protected void Awake()`)
  * `Awake()` is for initialization, `Start()` is for assigning variables.
+ * Use underscores before private variable names to increase readability.
+ * One `namespace` for entire project.
+ * Utils use a seperate `namespace`.
