@@ -1,78 +1,81 @@
 ﻿using UnityEngine;
 using System.Collections;
-
-public class GridlayoutWidthSetter : MonoBehaviour {
-    RectTransform rt;
-    UnityEngine.UI.GridLayoutGroup g;
-    CustomGrid c;
-    public int ChildrenNeededToScroll = 8;
-    public bool onlySetContainerHeight = true;
-    public bool onlyUseActiveChildren = true;
-    int childrenLast;
-    int ChildrenCount;
-    int AcLast = 0;
-    Vector2 spacing, cellSize;
-
-    void Awake()
+namespace util
+{
+    public class GridlayoutWidthSetter : MonoBehaviour
     {
-        rt = (RectTransform)transform;
+        RectTransform rt;
+        UnityEngine.UI.GridLayoutGroup g;
+        CustomGrid c;
+        public int ChildrenNeededToScroll = 8;
+        public bool onlySetContainerHeight = true;
+        public bool onlyUseActiveChildren = true;
+        int childrenLast;
+        int ChildrenCount;
+        int AcLast = 0;
+        Vector2 spacing, cellSize;
 
-        if (GetComponent<UnityEngine.UI.GridLayoutGroup>())
+        void Awake()
         {
-            g = GetComponent<UnityEngine.UI.GridLayoutGroup>();
-            g.cellSize = new Vector2(rt.rect.width, g.cellSize.y);
-            spacing = g.spacing;
-            cellSize = g.cellSize;
+            rt = (RectTransform)transform;
+
+            if (GetComponent<UnityEngine.UI.GridLayoutGroup>())
+            {
+                g = GetComponent<UnityEngine.UI.GridLayoutGroup>();
+                g.cellSize = new Vector2(rt.rect.width, g.cellSize.y);
+                spacing = g.spacing;
+                cellSize = g.cellSize;
+            }
+
+            if (GetComponent<CustomGrid>())
+            {
+                c = GetComponent<CustomGrid>();
+                if (!onlySetContainerHeight)
+                    c.ObjSize = new Vector2(rt.rect.width, c.ObjSize.y);
+                cellSize = c.ObjSize;
+                spacing = c.maxSpacing;
+
+            }
         }
 
-        if (GetComponent<CustomGrid>())
+        public void ForceUpdate()
         {
-            c = GetComponent<CustomGrid>();
-            if (!onlySetContainerHeight)
-                c.ObjSize = new Vector2(rt.rect.width, c.ObjSize.y);
-            cellSize = c.ObjSize;
-            spacing = c.maxSpacing;
-            
-        }
-    }
-
-    public void ForceUpdate()
-    {
-        ChildrenCount = activeChildCount();
-        if (ChildrenCount > ChildrenNeededToScroll)
-        {
-            if (!c)
-                rt.sizeDelta = new Vector2(rt.sizeDelta.x, (cellSize.y + spacing.y) * ChildrenCount);
+            ChildrenCount = activeChildCount();
+            if (ChildrenCount > ChildrenNeededToScroll)
+            {
+                if (!c)
+                    rt.sizeDelta = new Vector2(rt.sizeDelta.x, (cellSize.y + spacing.y) * ChildrenCount);
+                else
+                    rt.sizeDelta = new Vector2(rt.sizeDelta.x, (c.ObjSize.y + (c.padding.y + c.CurrentSpacing.y)) * Mathf.CeilToInt(ChildrenCount / (float)c.maxRows));
+            }
             else
-                rt.sizeDelta = new Vector2(rt.sizeDelta.x, (c.ObjSize.y + (c.padding.y + c.CurrentSpacing.y)) * Mathf.CeilToInt(ChildrenCount / (float)c.maxRows));
+            {
+                if (!c)
+                    rt.sizeDelta = new Vector2(rt.sizeDelta.x, (cellSize.y + spacing.y) * ChildrenNeededToScroll);
+                else
+                    rt.sizeDelta = new Vector2(rt.sizeDelta.x, (c.ObjSize.y + (c.padding.y + c.CurrentSpacing.y)) * (ChildrenNeededToScroll / c.maxRows));
+            }
         }
-        else
+
+        void Update()
         {
-            if (!c)
-                rt.sizeDelta = new Vector2(rt.sizeDelta.x, (cellSize.y + spacing.y) * ChildrenNeededToScroll);
-            else
-                rt.sizeDelta = new Vector2(rt.sizeDelta.x, (c.ObjSize.y + (c.padding.y + c.CurrentSpacing.y)) * (ChildrenNeededToScroll / c.maxRows));
+            ChildrenCount = activeChildCount();
+            if (childrenLast != ChildrenCount)
+            {
+
+                ForceUpdate();
+
+                AcLast = activeChildCount();
+            }
         }
-    }
-   
-    void Update()
-    {
-        ChildrenCount = activeChildCount();
-        if (childrenLast != ChildrenCount)
+
+        int activeChildCount()
         {
-
-            ForceUpdate();
-
-            AcLast = activeChildCount();
+            int r = 0;
+            foreach (Transform t in transform)
+                if (t.gameObject.activeSelf)
+                    r++;
+            return r;
         }
-    }
-
-    int activeChildCount()
-    {
-        int r = 0;
-        foreach (Transform t in transform)
-            if (t.gameObject.activeSelf)
-                r++;
-        return r;
     }
 }

@@ -1,16 +1,18 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
-
-public class SliderSetter : MonoBehaviour
+namespace util
 {
-    public Slider slider;
-    public ScrollRect scrollRect;
-    public float StartValue;
-
-    void Start()
+    public class SliderSetter : MonoBehaviour
     {
-        slider.value = StartValue;
-        scrollRect.verticalNormalizedPosition = StartValue;
+        public Slider slider;
+        public ScrollRect scrollRect;
+        public float StartValue;
+
+        void Start()
+        {
+            slider.value = StartValue;
+            scrollRect.verticalNormalizedPosition = StartValue;
+        }
     }
 }
