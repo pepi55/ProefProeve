@@ -8,13 +8,13 @@ Proef PvB
  
  Auto generated:
  ```C#
- public int Variable { get; set; }
+ public int Foo { get; set; }
  ```
  
  User generated:
  ```C#
- private int _variable_;
- public int _Variable_
+ private int bar;
+ public int Bar
  {
      get
      {
