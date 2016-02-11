@@ -12,7 +12,7 @@ namespace StateMachine
         {
             if (_currentState == newState)
                 return;
-
+            
             //run code
         }
     }
