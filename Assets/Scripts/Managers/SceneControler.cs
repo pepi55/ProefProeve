@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿//Author Jesse Stam
+//Created 12-2-2016
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
 
