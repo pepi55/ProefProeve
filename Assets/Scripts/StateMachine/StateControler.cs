@@ -5,7 +5,7 @@ namespace StateMachine
     public class StateControler : MonoBehaviour
     {
 
-        GameStates _currentState;
+        GameStates _currentState = GameStates.state1;
         public GameStates currentState { get { return _currentState; } }
 
         public void SwitchState(GameStates newState)

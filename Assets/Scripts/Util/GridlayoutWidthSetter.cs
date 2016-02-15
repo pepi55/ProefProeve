@@ -10,9 +10,8 @@ namespace util
         public int ChildrenNeededToScroll = 8;
         public bool onlySetContainerHeight = true;
         public bool onlyUseActiveChildren = true;
-        int childrenLast;
-        int ChildrenCount;
-        int AcLast = 0;
+        int childrenLast = 0;
+        int ChildrenCount = 0;
         Vector2 spacing, cellSize;
 
         void Awake()
@@ -64,8 +63,6 @@ namespace util
             {
 
                 ForceUpdate();
-
-                AcLast = activeChildCount();
             }
         }
 
