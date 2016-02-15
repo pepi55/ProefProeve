@@ -33,3 +33,4 @@ Proef PvB
  * Use underscores before private variable names to increase readability.
  * One `namespace` for entire project.
  * Utils use a seperate `namespace`.
+ * Warnings should be treated as errors.
