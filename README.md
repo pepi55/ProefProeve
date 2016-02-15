@@ -34,3 +34,4 @@ Proef PvB
  * One `namespace` for entire project.
  * Utils use a seperate `namespace`.
  * Warnings should be treated as errors.
+ * Always commit a working build.
