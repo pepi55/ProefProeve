@@ -58,14 +58,14 @@ namespace util
             return fileName + fileExstentions[fileType];
         }
 
-        public static void Save<T>(string fileName, fileTypes fileType, T token)
+        public static void Save<T>(string fileName, fileTypes fileType, T data)
         {
             string saveFile = SaveLocation(fileType);
             saveFile += GetFileType(fileName, fileType);
 
             IFormatter formatter = new BinaryFormatter();
             Stream stream = new FileStream(saveFile, FileMode.Create, FileAccess.Write, FileShare.ReadWrite);
-            formatter.Serialize(stream, token);
+            formatter.Serialize(stream, data);
             stream.Close();
 
             Debug.Log("Saved file: " + saveFile);

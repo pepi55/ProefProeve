@@ -8,7 +8,7 @@ namespace util
 
         public void OpenScene(string name)
         {
-            Application.LoadLevel(name);
+            SceneControler.Load(name);
         }
 
         public void CloseGame()
