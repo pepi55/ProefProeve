@@ -5,14 +5,17 @@ using System.Collections;
 
 public class MainMenu : MonoBehaviour {
 
+    [SerializeField]
+    OptionsMenu options;
+
 	public void Options(bool open)
     {
-
+        options.OpenMenu();
     }
 
     public void CloseGame()
     {
-
+        Application.Quit();
     }
 
     public void StartGame()
