@@ -5,7 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 
-namespace util
+namespace Util
 {
     public class ValueDebugger : MonoBehaviour
     {

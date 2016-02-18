@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-namespace util
+namespace Util
 {
     public class SceneUtils : MonoBehaviour
     {

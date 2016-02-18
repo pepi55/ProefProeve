@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
-namespace util
+namespace Util
 {
     public class SliderSetter : MonoBehaviour
     {

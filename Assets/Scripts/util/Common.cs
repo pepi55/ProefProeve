@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Linq;
 
-namespace util
+namespace Util
 {
     public static class Common
     {
