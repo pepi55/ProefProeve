@@ -46,7 +46,6 @@ public class OptionsMenu : MonoBehaviour {
 
         if (data.ResolutionIndex != -1 && data.screenHeight != -1 && data.screenWidth != -1)
         {
-
             resolutionSelector.dropdown.value = data.ResolutionIndex;
             if (!Application.isEditor)
                 Screen.SetResolution(data.screenWidth, data.screenHeight, data.useFullScreen);
