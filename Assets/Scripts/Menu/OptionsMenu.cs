@@ -12,11 +12,13 @@ public class OptionsMenu : MonoBehaviour {
     private Slider SFXVolume, MusicVolume;
     [SerializeField]
     private Toggle FullScreen;
+    [SerializeField]
+    private ResolutionSelector resolutionSelector;
 
     [SerializeField]
     OptionSaveData data;
 
-    void Start()
+    void Awake()
     {
         try
         {
@@ -42,6 +44,14 @@ public class OptionsMenu : MonoBehaviour {
         MusicVolume.value = data.MusicVolume;
 
         FullScreen.isOn = data.useFullScreen;
+
+        if (data.ResolutionIndex != -1 && data.screenHeight != -1 && data.screenWidth != -1)
+        {
+            resolutionSelector.dropdown.value = data.ResolutionIndex;
+            if (!Application.isEditor)
+                Screen.SetResolution(data.screenWidth, data.screenHeight, data.useFullScreen);
+        }
+        
     }
 
 	public void OpenMenu()
@@ -59,6 +69,11 @@ public class OptionsMenu : MonoBehaviour {
 
     public void SaveData()
     {
+        Resolution r = resolutionSelector.getCurrentResolution();
+
+        if (!Application.isEditor)
+            Screen.SetResolution(r.width, r.height, FullScreen.isOn);
+
         if (data == null)
         {
             data = new OptionSaveData();   
@@ -79,5 +94,13 @@ public class OptionsMenu : MonoBehaviour {
     public void FullScreenChange(bool b)
     {
         data.useFullScreen = b;
+    }
+
+    public void OnResolutionChange(int i)
+    {
+        Resolution r = resolutionSelector.getCurrentResolution();
+        data.screenWidth = r.width;
+        data.screenHeight = r.height;
+        data.ResolutionIndex = i;
     }
 }
