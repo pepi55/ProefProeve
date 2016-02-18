@@ -22,4 +22,9 @@ public class MainMenu : MonoBehaviour {
     {
 
     }
+
+    void Update()
+    {
+        Util.Debugger.Log("FPS", 1000 * Time.deltaTime);
+    }
 }
