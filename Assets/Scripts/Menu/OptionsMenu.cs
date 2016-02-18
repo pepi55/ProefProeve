@@ -11,7 +11,7 @@ public class OptionsMenu : MonoBehaviour {
     [SerializeField]
     private Slider SFXVolume, MusicVolume;
     [SerializeField]
-    private Toggle FullScreen;
+    private Toggle FullScreen,Vsync;
     [SerializeField]
     private ResolutionSelector resolutionSelector;
 
@@ -22,12 +22,12 @@ public class OptionsMenu : MonoBehaviour {
     {
         try
         {
-            util.Serialization.Load("OptionData", util.Serialization.fileTypes.binary, ref data);
+            Util.Serialization.Load("OptionData", Util.Serialization.fileTypes.binary, ref data);
 
             if (data == null)
             {
                 data = new OptionSaveData();
-                util.Serialization.Save("OptionData", util.Serialization.fileTypes.binary, data);
+                Util.Serialization.Save("OptionData", Util.Serialization.fileTypes.binary, data);
             }
         }
         catch (System.Exception e)
@@ -44,6 +44,9 @@ public class OptionsMenu : MonoBehaviour {
         MusicVolume.value = data.MusicVolume;
 
         FullScreen.isOn = data.useFullScreen;
+        Vsync.isOn = data.Vsync;
+
+        QualitySettings.vSyncCount = data.Vsync ? 0 | 1
 
         if (data.ResolutionIndex != -1 && data.screenHeight != -1 && data.screenWidth != -1)
         {
@@ -78,7 +81,7 @@ public class OptionsMenu : MonoBehaviour {
         {
             data = new OptionSaveData();   
         }
-        util.Serialization.Save("OptionData", util.Serialization.fileTypes.binary, data);
+        Util.Serialization.Save("OptionData", Util.Serialization.fileTypes.binary, data);
     }
 
     public void MusicVolumeChange(float f)

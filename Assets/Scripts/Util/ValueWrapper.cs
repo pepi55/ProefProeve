@@ -1,4 +1,4 @@
-﻿namespace util
+﻿namespace Util
 {
     [System.Serializable]
     public class ValueWrapper<T>
