@@ -9,4 +9,5 @@ public class OptionSaveData
     public bool Vsync =false;
 
     public int screenWidth = -1, screenHeight = -1, ResolutionIndex = -1;
+    public int TextureResolution = 0;
 }

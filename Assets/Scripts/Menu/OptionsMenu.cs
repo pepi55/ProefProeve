@@ -10,10 +10,15 @@ public class OptionsMenu : MonoBehaviour {
     public event VoidDelegate onClose;
     [SerializeField]
     private Slider SFXVolume = null, MusicVolume = null;
+
     [SerializeField]
     private Toggle FullScreen = null, Vsync = null;
+
     [SerializeField]
     private ResolutionSelector resolutionSelector = null;
+
+    [SerializeField]
+    private Dropdown textureResolution = null;
 
     [SerializeField]
     OptionSaveData data;
@@ -49,10 +54,12 @@ public class OptionsMenu : MonoBehaviour {
 
             FullScreen.isOn = data.useFullScreen;
             Vsync.isOn = data.Vsync;
+            textureResolution.value = data.TextureResolution;
 
-            if (data.ResolutionIndex != -1 && data.screenHeight != -1 && data.screenWidth != -1)
+            if (data.ResolutionIndex >= 0 && data.screenHeight > 0 && data.screenWidth > 0)
             {
-                resolutionSelector.dropdown.value = data.ResolutionIndex;
+                if (resolutionSelector.dropdown.options.Count > 0)
+                    resolutionSelector.dropdown.value = data.ResolutionIndex;
             }
         }
         catch (System.Exception e)
@@ -84,7 +91,8 @@ public class OptionsMenu : MonoBehaviour {
             Screen.SetResolution(r.width, r.height, FullScreen.isOn);
         }
 
-        QualitySettings.vSyncCount = data.Vsync ? 1 : 0;    
+        QualitySettings.vSyncCount = data.Vsync ? 1 : 0;
+        QualitySettings.masterTextureLimit = data.TextureResolution;
 
         if (data == null)
         {
@@ -119,5 +127,10 @@ public class OptionsMenu : MonoBehaviour {
     public void OnVsyncChange(bool b)
     {
         data.Vsync = b;
+    }
+
+    public void OnTextureQualityChange(int i)
+    {
+        data.TextureResolution = i;
     }
 }

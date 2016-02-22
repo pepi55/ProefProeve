@@ -28,6 +28,7 @@ public class QuallityInit : MonoBehaviour
         try
         {
             QualitySettings.vSyncCount = data.Vsync ? 1 : 0;
+            QualitySettings.masterTextureLimit = data.TextureResolution;
 
             if (data.ResolutionIndex != -1 && data.screenHeight != -1 && data.screenWidth != -1)
             {

@@ -38,6 +38,10 @@ public class ResolutionSelector : MonoBehaviour
 
     public Resolution getCurrentResolution()
     {
+        if (resolutions == null)
+            Awake();
+
         return resolutions[_dropdown.value];
+        
     }
 }
