@@ -83,10 +83,8 @@ public class OptionsMenu : MonoBehaviour {
             Resolution r = resolutionSelector.getCurrentResolution();
             Screen.SetResolution(r.width, r.height, FullScreen.isOn);
         }
-        QualitySettings.vSyncCount = data.Vsync ? 1 : 0;
 
-        
-            
+        QualitySettings.vSyncCount = data.Vsync ? 1 : 0;    
 
         if (data == null)
         {
