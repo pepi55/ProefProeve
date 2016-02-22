@@ -18,7 +18,7 @@ public class OptionsMenu : MonoBehaviour {
     [SerializeField]
     OptionSaveData data;
 
-    void Awake()
+    void Start()
     {
         init();
     }
@@ -39,23 +39,27 @@ public class OptionsMenu : MonoBehaviour {
         {
             Debug.LogException(e);
             Debug.Log(data);
+            Util.Debugger.Log("Expetion loading data", e.Message);
         }
 
-        SFXVolume.value = data.SFXVolume;
-        MusicVolume.value = data.MusicVolume;
-
-        FullScreen.isOn = data.useFullScreen;
-        Vsync.isOn = data.Vsync;
-
-        QualitySettings.vSyncCount = data.Vsync ? 0 : 1;
-
-        if (data.ResolutionIndex != -1 && data.screenHeight != -1 && data.screenWidth != -1)
+        try
         {
-            resolutionSelector.dropdown.value = data.ResolutionIndex;
-            if (!Application.isEditor)
-                Screen.SetResolution(data.screenWidth, data.screenHeight, data.useFullScreen);
+            SFXVolume.value = data.SFXVolume;
+            MusicVolume.value = data.MusicVolume;
+
+            FullScreen.isOn = data.useFullScreen;
+            Vsync.isOn = data.Vsync;
+
+            if (data.ResolutionIndex != -1 && data.screenHeight != -1 && data.screenWidth != -1)
+            {
+                resolutionSelector.dropdown.value = data.ResolutionIndex;
+            }
         }
-        
+        catch (System.Exception e)
+        {
+            Util.Debugger.Log("Exeption Assigning data", e);//.Message + "/n" + e.Source + "/n" + e.StackTrace);
+            Util.Debugger.Log("Exception Assinging Data Value", data);
+        }
     }
 
 	public void OpenMenu()
@@ -74,12 +78,13 @@ public class OptionsMenu : MonoBehaviour {
 
     public void SaveData()
     {
-        Resolution r = resolutionSelector.getCurrentResolution();
-
-        //QualitySettings.vSyncCount = data.Vsync ? 0 : 1;
-
         if (!Application.isEditor)
+        {
+            Resolution r = resolutionSelector.getCurrentResolution();
             Screen.SetResolution(r.width, r.height, FullScreen.isOn);
+        }
+
+        QualitySettings.vSyncCount = data.Vsync ? 1 : 0;    
 
         if (data == null)
         {

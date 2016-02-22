@@ -23,8 +23,19 @@ public class MainMenu : MonoBehaviour {
 
     }
 
+    int frame;
+    float time;
     void Update()
     {
-        Util.Debugger.Log("FPS", 1000 * Time.deltaTime);
+        frame++;
+        time += Time.deltaTime;
+
+        if (time >= 1)
+        {
+            time = 0;
+            Util.Debugger.Log("FPS", frame);
+            frame = 0;
+           
+        }
     }
 }

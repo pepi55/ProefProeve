@@ -4,8 +4,9 @@
 using UnityEngine;
 using System.Collections;
 
-public class GameManager : MonoBehaviour {
-    public GameManager instance
+public class GameManager : MonoBehaviour
+{
+    public static GameManager instance
     {
         get
         {
@@ -23,9 +24,9 @@ public class GameManager : MonoBehaviour {
             return _instance;
         }
     }
-    private GameManager _instance;
+    protected static GameManager _instance;
 
-	protected void Awake()
+    protected void Awake()
     {
         _instance = this;
     }

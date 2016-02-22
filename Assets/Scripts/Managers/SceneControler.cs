@@ -26,6 +26,7 @@ public static class SceneControler
             if(SceneName == s.name)
             {
                 SceneManager.UnloadScene(s.name);
+                
             }
         }
     }
