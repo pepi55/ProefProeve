@@ -1,15 +1,31 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿// Created by: Petar Dimitrov.
+// Date: 22/02/2016
 
-public class PlayerBehaviour : MonoBehaviour {
+using Events;
+using UnityEngine;
 
-	// Use this for initialization
-	void Start () {
-	
+/// <summary>
+/// Extend this class to make a new player.
+/// </summary>
+public class PlayerBehaviour : BaseBehaviour
+{
+	protected void Move (Vector2 dir)
+	{
+		gameObject.transform.Translate(dir * Time.deltaTime);
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+
+	protected virtual void Attack ()
+	{
+		GlobalEvents.Invoke(new AttackEvent());
+	}
+
+	protected virtual void Deflect ()
+	{
+		GlobalEvents.Invoke(new DeflectEvent());
+	}
+
+	protected virtual void Ultimate ()
+	{
+		GlobalEvents.Invoke(new UltEvent());
 	}
 }
