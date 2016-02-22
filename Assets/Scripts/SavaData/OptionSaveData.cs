@@ -10,4 +10,5 @@ public class OptionSaveData
 
     public int screenWidth = -1, screenHeight = -1, ResolutionIndex = -1;
     public int TextureResolution = 0;
+    public int AALevel = 0;
 }

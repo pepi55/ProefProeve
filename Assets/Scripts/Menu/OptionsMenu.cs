@@ -18,7 +18,7 @@ public class OptionsMenu : MonoBehaviour {
     private ResolutionSelector resolutionSelector = null;
 
     [SerializeField]
-    private Dropdown textureResolution = null;
+    private Dropdown textureResolution = null, AADropDown= null;
 
     [SerializeField]
     OptionSaveData data;
@@ -55,6 +55,7 @@ public class OptionsMenu : MonoBehaviour {
             FullScreen.isOn = data.useFullScreen;
             Vsync.isOn = data.Vsync;
             textureResolution.value = data.TextureResolution;
+            AADropDown.value = data.AALevel;
 
             if (data.ResolutionIndex >= 0 && data.screenHeight > 0 && data.screenWidth > 0)
             {
@@ -94,6 +95,25 @@ public class OptionsMenu : MonoBehaviour {
         QualitySettings.vSyncCount = data.Vsync ? 1 : 0;
         QualitySettings.masterTextureLimit = data.TextureResolution;
 
+        switch (data.AALevel)
+        {
+            case 0:
+                QualitySettings.antiAliasing = 0;
+                break;
+
+            case 1:
+                QualitySettings.antiAliasing = 2;
+                break;
+
+            case 2:
+                QualitySettings.antiAliasing = 4;
+                break;
+
+            case 3:
+                QualitySettings.antiAliasing = 8;
+                break;
+        }
+
         if (data == null)
         {
             data = new OptionSaveData();   
@@ -132,5 +152,10 @@ public class OptionsMenu : MonoBehaviour {
     public void OnTextureQualityChange(int i)
     {
         data.TextureResolution = i;
+    }
+
+    public void OnAASettingChange(int i)
+    {
+        data.AALevel = i;
     }
 }
