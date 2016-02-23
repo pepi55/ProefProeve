@@ -5,7 +5,7 @@ public class StatusBar : MonoBehaviour
     [Range(0f, 1f)]
     public float F;
 
-    enum direction
+    enum Direction
     {
         Vertical_left,
         Vertical_right,
@@ -14,8 +14,8 @@ public class StatusBar : MonoBehaviour
     }
 
     [SerializeField]
-    direction ScaleDirection = direction.Vertical_left;
-    direction _ScaleDirection = direction.Vertical_left;
+    Direction ScaleDirection = Direction.Vertical_left;
+    Direction _ScaleDirection = Direction.Vertical_left;
 
     [SerializeField]
     RectTransform Mask = null,Image = null;
@@ -80,19 +80,19 @@ public class StatusBar : MonoBehaviour
         SetupDirection();
         switch (ScaleDirection)
         {
-            case direction.Vertical_left:
+            case Direction.Vertical_left:
                 Mask.sizeDelta = new Vector2(orignalSize.x * f, orignalSize.y);
                 break;
 
-            case direction.Vertical_right:
+            case Direction.Vertical_right:
                 Mask.sizeDelta = new Vector2(orignalSize.x * f, orignalSize.y);
                 break;
 
-            case direction.Horizontal_up:
+            case Direction.Horizontal_up:
                 Mask.sizeDelta = new Vector2(orignalSize.x, orignalSize.y * f);
                 break;
 
-            case direction.Horizontal_down:
+            case Direction.Horizontal_down:
                 Mask.sizeDelta = new Vector2(orignalSize.x, orignalSize.y * f);
                 break;
         }
@@ -107,8 +107,8 @@ public class StatusBar : MonoBehaviour
 
         switch (ScaleDirection)
         {
-            case direction.Vertical_left:
-            case direction.Horizontal_up:
+            case Direction.Vertical_left:
+            case Direction.Horizontal_up:
                 Image.anchorMax = new Vector2(0, 1);
                 Image.anchorMin = new Vector2(0, 1);
                 Image.pivot = new Vector2(0, 1);
@@ -118,8 +118,8 @@ public class StatusBar : MonoBehaviour
                 Mask.pivot = new Vector2(0, 1);
                 break;
 
-            case direction.Vertical_right:
-            case direction.Horizontal_down:
+            case Direction.Vertical_right:
+            case Direction.Horizontal_down:
                 Image.anchorMax = new Vector2(1, 0);
                 Image.anchorMin = new Vector2(1, 0);
                 Image.pivot = new Vector2(1, 0);

@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
+using UnityEngine.Networking;
 using System.Collections;
 
-public class BaseBehaviour : MonoBehaviour
+
+public class BaseBehaviour : NetworkBehaviour
 {
 
     //MainThreadDeltaTime;
