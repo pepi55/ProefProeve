@@ -7,31 +7,31 @@ public class AttackPlayerLocal : PlayerBehaviour
 {
 	public override void MainUpdate ()
 	{
-		playerDirection = Vector2.zero;
+		_playerDirection = Vector2.zero;
 
 		if (Input.GetKey(KeyCode.D))
 		{
-			playerDirection += Vector2.right;
+			_playerDirection += Vector2.right;
 		}
 
 		if (Input.GetKey(KeyCode.A))
 		{
-			playerDirection += Vector2.left;
+			_playerDirection += Vector2.left;
 		}
 
 		if (Input.GetKey(KeyCode.W))
 		{
-			playerDirection += Vector2.up;
+			_playerDirection += Vector2.up;
 		}
 
 		if (Input.GetKey(KeyCode.S))
 		{
-			playerDirection += Vector2.down;
+			_playerDirection += Vector2.down;
 		}
 
-		if (playerDirection != Vector2.zero)
+		if (_playerDirection != Vector2.zero)
 		{
-			Move(playerDirection);
+			Move(_playerDirection);
 		}
 	}
 }
