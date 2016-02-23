@@ -2,9 +2,6 @@
 using System.Collections;
 public class StatusBar : MonoBehaviour
 {
-    [Range(0f, 1f)]
-    public float F;
-
     enum Direction
     {
         Vertical_left,
@@ -68,11 +65,6 @@ public class StatusBar : MonoBehaviour
         orignalSize = Mask.sizeDelta;
 
         Debug.Log("butter");
-    }
-
-    void Update()
-    {
-        Value = F;
     }
 
     void ChangeSize(float f)
