@@ -63,8 +63,6 @@ public class StatusBar : MonoBehaviour
         Mask.anchoredPosition = Vector3.zero;
 
         orignalSize = Mask.sizeDelta;
-
-        Debug.Log("butter");
     }
 
     void ChangeSize(float f)
