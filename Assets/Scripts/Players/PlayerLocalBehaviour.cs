@@ -26,6 +26,32 @@ public class PlayerLocalBehaviour : MonoBehaviour, IPlayerBehaviour
 	public void Move (Vector2 dir)
 	{
 		gameObject.transform.Translate(dir * (Time.deltaTime * playerSpeed));
+
+		/*
+		Vector2 tempPos = gameObject.transform.position;
+
+		if (gameObject.transform.position.x <= 0)
+		{
+			tempPos.x = 0;
+		}
+
+		if (gameObject.transform.position.x >= Screen.width)
+		{
+			tempPos.x = Screen.width;
+		}
+
+		if (gameObject.transform.position.y <= 0)
+		{
+			tempPos.y = 0;
+		}
+
+		if (gameObject.transform.position.y >= Screen.height)
+		{
+			tempPos.y = Screen.height;
+		}
+
+		gameObject.transform.position = tempPos;
+		*/
 	}
 
 	/// <summary>

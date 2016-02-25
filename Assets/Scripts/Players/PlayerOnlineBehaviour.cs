@@ -7,7 +7,7 @@ using UnityEngine.Networking;
 /// <summary>
 /// Extend this class to make a new Online player.
 /// </summary>
-public class PlayerOnlineBehaviour : NetworkBehaviour
+public class PlayerOnlineBehaviour : NetworkBehaviour, IPlayerBehaviour
 {
 	public static int PlayerHealth { get; private set; }
 
@@ -39,6 +39,10 @@ public class PlayerOnlineBehaviour : NetworkBehaviour
 	/// </summary>
 	public void Ability1 ()
 	{
+		if (!isLocalPlayer)
+		{
+			return;
+		}
 	}
 
 	/// <summary>
@@ -46,5 +50,9 @@ public class PlayerOnlineBehaviour : NetworkBehaviour
 	/// </summary>
 	public void Ability2 ()
 	{
+		if (!isLocalPlayer)
+		{
+			return;
+		}
 	}
 }
