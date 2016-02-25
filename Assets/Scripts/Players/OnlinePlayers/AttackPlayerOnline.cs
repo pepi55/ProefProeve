@@ -2,10 +2,11 @@
 // Date: 22/02/2016
 
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class AttackPlayerOnline : PlayerBehaviour
+public class AttackPlayerOnline : PlayerOnlineBehaviour, IPlayerBehaviour
 {
-	public override void MainUpdate ()
+	protected void Update ()
 	{
 		_playerDirection = Vector2.zero;
 

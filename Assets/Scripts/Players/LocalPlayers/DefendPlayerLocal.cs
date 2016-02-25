@@ -3,9 +3,9 @@
 
 using UnityEngine;
 
-public class DefendPlayerLocal : PlayerBehaviour
+public class DefendPlayerLocal : PlayerLocalBehaviour, IPlayerBehaviour
 {
-	public override void MainUpdate ()
+	protected void Update ()
 	{
 		_playerDirection = Vector2.zero;
 

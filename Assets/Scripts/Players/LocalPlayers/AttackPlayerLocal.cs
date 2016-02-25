@@ -2,10 +2,14 @@
 // Date: 23/02/2016
 
 using UnityEngine;
+using Events;
 
-public class AttackPlayerLocal : PlayerBehaviour
+/// <summary>
+/// Attack player for local play.
+/// </summary>
+public class AttackPlayerLocal : PlayerLocalBehaviour
 {
-	public override void MainUpdate ()
+	protected void Update ()
 	{
 		_playerDirection = Vector2.zero;
 

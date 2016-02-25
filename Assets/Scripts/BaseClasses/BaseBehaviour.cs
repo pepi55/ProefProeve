@@ -1,17 +1,17 @@
-﻿using UnityEngine;
+﻿// Created by: Jesse Stam.
+// Date: 20/02/2016
+
+using UnityEngine;
 using UnityEngine.Networking;
-using System.Collections;
 
-
-public class BaseBehaviour : NetworkBehaviour
+public class BaseBehaviour : MonoBehaviour
 {
-
     //MainThreadDeltaTime;
-    System.DateTime t;
+    private System.DateTime t;
     protected System.TimeSpan deltaTimeMain;
 
     //SecondaryThreadDeltaTime;
-    System.DateTime t2;
+    private System.DateTime t2;
     protected System.TimeSpan deltaTimeSecondary;
 
     private bool startedSecondThread;
