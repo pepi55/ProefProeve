@@ -7,6 +7,10 @@ public class EnemySpawner : MonoBehaviour
     public Vector3 spawnMin;
     [SerializeField]
     public Vector3 spawnMax;
+#if UNITY_EDITOR
+    [SerializeField]
+    Color lineColor;
+#endif
 
     void Start()
     {
@@ -16,7 +20,13 @@ public class EnemySpawner : MonoBehaviour
     float t;
     void Update()
     {
-        TestSpawn();
+        if (t > 0.05f)
+        {
+            TestSpawn();
+            t = 0;
+        }
+
+        t += Time.deltaTime;
     }
 
     void TestSpawn()
@@ -32,11 +42,13 @@ public class EnemySpawner : MonoBehaviour
 
         Rigidbody r = g.AddComponent<Rigidbody>();
 
-        r.velocity = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), Random.Range(-1f, 1f));
+        r.velocity = new Vector3(0, 0, -2);
         r.useGravity = false;
 
+        g.AddComponent<EnemyBase>();
 
-        Destroy(g, 10f);
+
+        Destroy(g, 20f);
 
     }
 
@@ -72,7 +84,7 @@ public class EnemySpawner : MonoBehaviour
 
     public void OnDrawGizmos()
     {
-        Gizmos.color = Color.white;
+        Gizmos.color = lineColor;
         Gizmos.DrawLine(tmpMin, new Vector3(tmpMin.x, tmpMin.y, tmpMax.z));
         Gizmos.DrawLine(tmpMin, new Vector3(tmpMin.x, tmpMax.y, tmpMin.z));
         Gizmos.DrawLine(tmpMin, new Vector3(tmpMax.x, tmpMin.y, tmpMin.z));
