@@ -46,6 +46,15 @@ public class EnemySpawner : MonoBehaviour
         return new Vector3(Random.Range(spawnMin.x, spawnMax.x), Random.Range(spawnMin.y, spawnMax.y), Random.Range(spawnMin.z, spawnMax.z));
     }
 
+    [ContextMenu("Center")]
+    void Center()
+    {
+        Vector3 startPos = transform.position;
+        transform.position = Vector3.Lerp(spawnMax + transform.position, spawnMin + transform.position, 0.5f);
+        Vector3 diff =transform.position - startPos;
+        spawnMin -= diff;
+        spawnMax -= diff;
+    }
 
 #if UNITY_EDITOR
     Vector3 tmpMax;
@@ -58,24 +67,7 @@ public class EnemySpawner : MonoBehaviour
         Gizmos.DrawCube(tmpMin, Vector3.one * 0.5f);
         Gizmos.color = Color.red;
         Gizmos.DrawCube(tmpMax, Vector3.one * 0.5f);
-
-        //Gizmos.color = Color.yellow;
-        //Gizmos.DrawLine(tmpMin, new Vector3(tmpMin.x, tmpMin.y, tmpMax.z));
-        //Gizmos.DrawLine(tmpMin, new Vector3(tmpMin.x, tmpMax.y, tmpMin.z));
-        //Gizmos.DrawLine(tmpMin, new Vector3(tmpMax.x, tmpMin.y, tmpMin.z));
-
-        //Gizmos.DrawLine(tmpMax, new Vector3(tmpMax.x, tmpMax.y, tmpMin.z));
-        //Gizmos.DrawLine(tmpMax, new Vector3(tmpMax.x, tmpMin.y, tmpMax.z));
-        //Gizmos.DrawLine(tmpMax, new Vector3(tmpMin.x, tmpMax.y, tmpMax.z));
-
-        //Gizmos.DrawLine(new Vector3(tmpMax.x, tmpMin.y, tmpMax.z), new Vector3(tmpMax.x, tmpMin.y, tmpMin.z));
-        //Gizmos.DrawLine(new Vector3(tmpMax.x, tmpMin.y, tmpMax.z), new Vector3(tmpMin.x, tmpMin.y, tmpMax.z));
-
-        //Gizmos.DrawLine(new Vector3(tmpMin.x, tmpMax.y, tmpMin.z), new Vector3(tmpMin.x, tmpMax.y, tmpMax.z));
-        //Gizmos.DrawLine(new Vector3(tmpMin.x, tmpMax.y, tmpMin.z), new Vector3(tmpMax.x, tmpMax.y, tmpMin.z));
-
-        //Gizmos.DrawLine(new Vector3(tmpMin.x, tmpMin.y, tmpMax.z), new Vector3(tmpMin.x, tmpMax.y, tmpMax.z));
-        //Gizmos.DrawLine(new Vector3(tmpMax.x, tmpMax.y, tmpMin.z), new Vector3(tmpMax.x, tmpMin.y, tmpMin.z));
+        
     }
 
     public void OnDrawGizmos()
