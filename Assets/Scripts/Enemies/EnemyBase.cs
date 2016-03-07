@@ -1,12 +1,17 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿// Created by: Jesse Stam.
+// Date: 07/03/2016
+
+using UnityEngine;
 
 public class EnemyBase : MonoBehaviour
 {
-    public void OnTriggerEnter(Collider other)
-    {
-        GetComponent<Rigidbody>().velocity = Vector3.zero;
+	public bool IsAlive { get; private set; }
 
-        GetComponent<Renderer>().material.color = Color.blue;
-    }
+	public void OnTriggerEnter(Collider other)
+	{
+		IsAlive = false;
+
+		GetComponent<Rigidbody>().velocity = Vector3.zero;
+		GetComponent<Renderer>().material.color = Color.blue;
+	}
 }

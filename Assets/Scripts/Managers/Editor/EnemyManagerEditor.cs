@@ -4,12 +4,12 @@
 using UnityEngine;
 using UnityEditor;
 
-[CustomEditor(typeof(EnemySpawner))]
-public class EnemySpawnerEditor : Editor
+[CustomEditor(typeof(EnemyManager))]
+public class EnemyManagerEditor : Editor
 {
 	protected void OnSceneGUI()
 	{
-		EnemySpawner t = (EnemySpawner)target;
+		EnemyManager t = (EnemyManager)target;
 
 		EditorGUI.BeginChangeCheck();
 		Vector3 pos1 = Handles.FreeMoveHandle(t.transform.position + t.SpawnMax, Quaternion.identity, .5f, new Vector3(.5f, .5f, .5f), Handles.RectangleCap);

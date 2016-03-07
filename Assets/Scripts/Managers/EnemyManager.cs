@@ -3,9 +3,8 @@
 
 using UnityEngine;
 
-public class EnemySpawner : MonoBehaviour
+public class EnemyManager : MonoBehaviour
 {
-	//public for a editor script
 	[SerializeField] private Vector3 spawnMin;
 	public Vector3 SpawnMin
 	{
@@ -34,22 +33,30 @@ public class EnemySpawner : MonoBehaviour
 		}
 	}
 
-	[SerializeField] private GameObject Enemy;
-
-	[SerializeField, Tooltip("time in seconds")] float SpawnDelay = 0.05f;
+	[SerializeField] private GameObject[] enemies;
+	[SerializeField, Tooltip("time in seconds")] float SpawnDelay;
 
 #if UNITY_EDITOR
 	[SerializeField] private Color lineColor;
 #endif
 
 	private float timer;
-	void Update()
+
+	protected void Start ()
+	{
+		foreach (GameObject enemy in enemies)
+		{
+			enemy.SetActive(false);
+		}
+	}
+
+	protected void Update()
 	{
 		if (timer > SpawnDelay)
 		{
-			if (Enemy)
+			if (enemies.Length > 0)
 			{
-				Spawn();
+				SpawnEnemies();
 			}
 			else {
 				TestSpawn();
@@ -61,7 +68,7 @@ public class EnemySpawner : MonoBehaviour
 		timer += Time.deltaTime;
 	}
 
-	void TestSpawn()
+	private void TestSpawn()
 	{
 		GameObject g = GameObject.CreatePrimitive(PrimitiveType.Cube);
 		//Destroy(g.GetComponent<BoxCollider>());
@@ -74,7 +81,7 @@ public class EnemySpawner : MonoBehaviour
 
 		Rigidbody r = g.AddComponent<Rigidbody>();
 
-		r.velocity = new Vector3(0, 0, -2);
+		r.velocity = new Vector3(0, 0, -5);
 		r.useGravity = false;
 
 		g.AddComponent<EnemyBase>();
@@ -82,8 +89,27 @@ public class EnemySpawner : MonoBehaviour
 		Destroy(g, 20f);
 	}
 
-	private void Spawn()
+	private void SpawnEnemies()
 	{
+		GameObject enemy = GetDisabledEnemy(enemies);
+
+		if (enemy != null)
+		{
+			enemy.SetActive(true);
+		}
+	}
+
+	private GameObject GetDisabledEnemy(GameObject[] enemyArray)
+	{
+		foreach (GameObject enemy in enemyArray)
+		{
+			if (enemy.activeSelf == false)
+			{
+				return enemy;
+			}
+		}
+
+		return null;
 	}
 
 	private Vector3 RandomPos()
