@@ -36,3 +36,4 @@ Proef PvB
  * Utils use a seperate `namespace`.
  * Warnings should be treated as errors.
  * Always commit a working build.
+ * Always add protection level to method/variable.
