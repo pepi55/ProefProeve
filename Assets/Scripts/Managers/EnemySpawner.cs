@@ -7,7 +7,32 @@ public class EnemySpawner : MonoBehaviour
 {
 	//public for a editor script
 	[SerializeField] private Vector3 spawnMin;
+	public Vector3 SpawnMin
+	{
+		get
+		{
+			return spawnMin;
+		}
+
+		set
+		{
+			spawnMin = value;
+		}
+	}
+
 	[SerializeField] private Vector3 spawnMax;
+	public Vector3 SpawnMax
+	{
+		get
+		{
+			return spawnMax;
+		}
+
+		set
+		{
+			spawnMax = value;
+		}
+	}
 
 	[SerializeField] private GameObject Enemy;
 
