@@ -3,10 +3,13 @@ using System.Collections;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField]
-    public Vector3 spawnMin;
-    [SerializeField]
+    //public for a editor script
+    public Vector3 spawnMin;   
     public Vector3 spawnMax;
+
+    [SerializeField]
+    GameObject Enemy;
+
 #if UNITY_EDITOR
     [SerializeField]
     Color lineColor;
