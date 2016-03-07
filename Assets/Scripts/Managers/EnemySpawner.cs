@@ -10,6 +10,9 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField]
     GameObject Enemy;
 
+    [SerializeField, Tooltip("time in seconds")]
+    float SpawnDelay = 0.05f;
+
 #if UNITY_EDITOR
     [SerializeField]
     Color lineColor;
@@ -23,7 +26,7 @@ public class EnemySpawner : MonoBehaviour
     float t;
     void Update()
     {
-        if (t > 0.05f)
+        if (t > SpawnDelay)
         {
             TestSpawn();
             t = 0;
