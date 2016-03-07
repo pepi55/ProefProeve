@@ -7,6 +7,8 @@ public class Game_UIControler : MonoBehaviour {
     StatusBar PlayerHealth;
     [SerializeField]
     StatusBar SuperAttackChargeBar;
+
+    protected float Player;
     protected void Start()
     {
 
@@ -14,7 +16,7 @@ public class Game_UIControler : MonoBehaviour {
 
     public void Update()
     {
-        PlayerHealth.Value = Mathf.PingPong(Time.time, 1f);
+        PlayerHealth.Value = Player;
         SuperAttackChargeBar.Value = Mathf.PingPong(Time.time - 0.5f, 1f);
     }
 }
