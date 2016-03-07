@@ -3,9 +3,9 @@ using System.Collections;
 
 public class EnemySpawner : MonoBehaviour
 {
-	//public for a editor script
-	public Vector3 spawnMin;
-	public Vector3 spawnMax;
+    //public for a editor script
+    public Vector3 spawnMin;   
+    public Vector3 spawnMax;
 
 	[SerializeField]
 	GameObject Enemy;
@@ -18,53 +18,72 @@ public class EnemySpawner : MonoBehaviour
 	Color lineColor;
 #endif
 
-	float t;
-	void Update()
-	{
-		if (t > SpawnDelay)
-		{
-			TestSpawn();
-			t = 0;
-		}
+    void Start()
+    {
 
-		t += Time.deltaTime;
-	}
+    }
 
-	void TestSpawn()
-	{
-		GameObject g = GameObject.CreatePrimitive(PrimitiveType.Cube);
-		//Destroy(g.GetComponent<BoxCollider>());
-		g.name = "Test";
-		PhysicMaterial pm = new PhysicMaterial("BOUNCE");
-		pm.bounciness = 0.8f;
-		g.GetComponent<BoxCollider>().material = pm;
-		g.transform.SetParent(transform, false);
-		g.transform.localPosition = RandomPos();
+    float t;
+    void Update()
+    {
+        if (t > SpawnDelay)
+        {
+            if (Enemy)
+            {
+                Spawn();
+            }
+            else {
+                TestSpawn();
+            }
 
-		Rigidbody r = g.AddComponent<Rigidbody>();
+            t = 0;
+        }
 
-		r.velocity = new Vector3(0, 0, -2);
-		r.useGravity = false;
+        t += Time.deltaTime;
+    }
 
-		g.AddComponent<EnemyBase>();
+    void TestSpawn()
+    {
+        GameObject g = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        //Destroy(g.GetComponent<BoxCollider>());
+        g.name = "Test";
+        PhysicMaterial pm = new PhysicMaterial("BOUNCE");
+        pm.bounciness = 0.8f;
+        g.GetComponent<BoxCollider>().material = pm;
+        g.transform.SetParent(transform, false);
+        g.transform.localPosition = RandomPos();
 
-		Destroy(g, 20f);
-	}
+        Rigidbody r = g.AddComponent<Rigidbody>();
 
-	Vector3 RandomPos()
-	{
-		return new Vector3(Random.Range(spawnMin.x, spawnMax.x), Random.Range(spawnMin.y, spawnMax.y), Random.Range(spawnMin.z, spawnMax.z));
-	}
+        r.velocity = new Vector3(0, 0, -2);
+        r.useGravity = false;
 
-	[ContextMenu("Center")]
-	void Center()
-	{
-		Vector3 startPos = transform.position;
-		transform.position = Vector3.Lerp(spawnMax + transform.position, spawnMin + transform.position, 0.5f);
-		Vector3 diff =transform.position - startPos;
-		spawnMin -= diff;
-		spawnMax -= diff;
-	}
+        g.AddComponent<EnemyBase>();
+
+
+        Destroy(g, 20f);
+
+    }
+
+    void Spawn()
+    {
+
+    }
+    Vector3 RandomPos()
+    {
+
+        return new Vector3(Random.Range(spawnMin.x, spawnMax.x), Random.Range(spawnMin.y, spawnMax.y), Random.Range(spawnMin.z, spawnMax.z));
+    }
+
+    [ContextMenu("Center")]
+    void Center()
+    {
+        Vector3 startPos = transform.position;
+        transform.position = Vector3.Lerp(spawnMax + transform.position, spawnMin + transform.position, 0.5f);
+        Vector3 diff =transform.position - startPos;
+        spawnMin -= diff;
+        spawnMax -= diff;
+    }
 
 #if UNITY_EDITOR
 	Vector3 tmpMax;
