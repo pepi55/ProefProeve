@@ -1,7 +1,8 @@
-﻿// Created by: Jesse Stam.
-// Date: 07/03/2016
+// Created by: Jesse Stam.
+//26-2-2016
 
 using UnityEngine;
+using System.Collections;
 
 public class EnemyManager : MonoBehaviour
 {

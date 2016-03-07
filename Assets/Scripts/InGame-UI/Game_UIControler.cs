@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿//Author Jesse Stam
+//23-2-2016
+
+using UnityEngine;
 using System.Collections;
 
 public class Game_UIControler : MonoBehaviour {
@@ -8,15 +11,15 @@ public class Game_UIControler : MonoBehaviour {
     [SerializeField]
     StatusBar SuperAttackChargeBar;
 
-    protected float Player;
-    protected void Start()
+    private float Player;
+    private void Start()
     {
 
     }
 
-    public void Update()
+    private void Update()
     {
-        PlayerHealth.Value = Player;
+        PlayerHealth.Value = PlayerStats.playerHealth/100f;
         SuperAttackChargeBar.Value = Mathf.PingPong(Time.time - 0.5f, 1f);
     }
 }

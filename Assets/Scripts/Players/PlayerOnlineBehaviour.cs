@@ -9,9 +9,9 @@ using UnityEngine.Networking;
 /// </summary>
 public class PlayerOnlineBehaviour : NetworkBehaviour, IPlayerBehaviour
 {
-	public static int PlayerHealth { get; private set; }
+    public static float PlayerHealth { get { return PlayerStats.playerHealth; } private set { PlayerStats.playerHealth = value; } }
 
-	protected Vector2 _playerDirection;
+    protected Vector2 _playerDirection;
 	private int playerSpeed;
 
 	protected void Start ()

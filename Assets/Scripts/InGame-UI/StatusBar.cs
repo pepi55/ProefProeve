@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿//Author Jesse Stam
+//25-2-2016
+
+using UnityEngine;
 using System.Collections;
 public class StatusBar : MonoBehaviour
 {

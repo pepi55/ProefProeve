@@ -1,7 +1,8 @@
-﻿// Created by: Jesse Stam.
-// Date: 07/03/2016
-
+﻿//Author Jesse Stam
+//26-2-2016
 using UnityEngine;
+using System.Collections;
+
 
 public class EnemyBase : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class EnemyBase : MonoBehaviour
 		IsAlive = false;
 
 		GetComponent<Rigidbody>().velocity = Vector3.zero;
-		GetComponent<Renderer>().material.color = Color.blue;
-	}
+        GetComponent<Renderer>().material.color = Color.blue;
+
+        GetComponent<BoxCollider>().enabled = false;
+    }
 }
