@@ -4,9 +4,9 @@ Proef PvB
 ## Contribution
 ### Code Conventions
  * Enter Bracket
- * __No public variables, use properties.__
+ * Folders are UpperCamelCase.
  * __No one letter variables.__
- 
+ * __No public variables, use properties.__
  Auto generated:
  ```C#
  public int Foo { get; set; }
