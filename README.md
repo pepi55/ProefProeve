@@ -4,7 +4,8 @@ Proef PvB
 ## Contribution
 ### Code Conventions
  * Enter Bracket
- * No public variables, use properties.
+ * __No public variables, use properties.__
+ * __No one letter variables.__
  
  Auto generated:
  ```C#
