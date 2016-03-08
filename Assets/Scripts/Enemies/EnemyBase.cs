@@ -28,7 +28,7 @@ public class EnemyBase : MonoBehaviour
     private void Awake()
     {
         render = GetComponent<Renderer>();
-        render.material.color = Color.red;
+        render.material.color = Color.white;
 
         rigibody = GetComponent<Rigidbody>();
         rigibody.useGravity = false;
@@ -40,7 +40,7 @@ public class EnemyBase : MonoBehaviour
     {
         IsAlive = true;
         IsRemoved = false;
-        Render.material.color = Color.red;
+        Render.material.color = Color.white;
         gameObject.SetActive(true);
         GetComponent<BoxCollider>().enabled = true;
     }
