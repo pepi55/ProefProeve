@@ -47,13 +47,13 @@ public class EnemyBase : MonoBehaviour
         GetComponent<BoxCollider>().enabled = false;
     }
 
-    public void Remove(float f)
+    public void Remove(float delay)
     {
 
     }
 
-    IEnumerator RemoveDelay()
+    IEnumerator RemoveDelay(float delay)
     {
-
+        yield return new WaitForSeconds(delay);
     }
 }
