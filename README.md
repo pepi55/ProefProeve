@@ -40,4 +40,4 @@ Proef PvB
  * Always add protection level to method/variable.
 
 ## Contributors
-Joost Voss, Dejorden Moerman, Sander de Boer, Angelina Mendesduarte, Jesse Stam, Petar Dimitrov.
+Joost Voss, Dejorden Moerman, Sander de Boer, Angelina Mendes Duarte, Jesse Stam, Petar Dimitrov.
