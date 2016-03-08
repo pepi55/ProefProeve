@@ -3,71 +3,45 @@
 
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 public class EnemyManager : MonoBehaviour
 {
 	[SerializeField] private Vector3 spawnMin;
-	public Vector3 SpawnMin
-	{
-		get
-		{
-			return spawnMin;
-		}
-
-		set
-		{
-			spawnMin = value;
-		}
-	}
-
 	[SerializeField] private Vector3 spawnMax;
-	public Vector3 SpawnMax
-	{
-		get
-		{
-			return spawnMax;
-		}
+	
+    
+    [SerializeField, Tooltip("A List of the enemies that can be spawned")]private GameObject[] SpawnAbleEnemies;
+	[SerializeField, Tooltip("time in seconds")] private float SpawnDelay;
 
-		set
-		{
-			spawnMax = value;
-		}
-	}
+    private List<EnemyBase> enemyPool;
 
-	[SerializeField] private GameObject[] enemies;
-	[SerializeField, Tooltip("time in seconds")] float SpawnDelay;
-
-#if UNITY_EDITOR
-	[SerializeField] private Color lineColor;
-#endif
-
-	private float timer;
+    private float spawnTimer;
 
 	protected void Start ()
 	{
-		foreach (GameObject enemy in enemies)
-		{
-			enemy.SetActive(false);
-		}
+        enemyPool = new List<EnemyBase>();
 	}
 
-	protected void Update()
-	{
-		if (timer > SpawnDelay)
-		{
-			if (enemies.Length > 0)
-			{
-				SpawnEnemies();
-			}
-			else {
-				TestSpawn();
-			}
+    protected void Update()
+    {
+        if (spawnTimer > SpawnDelay)
+        {
+            if (SpawnAbleEnemies.Length > 0)
+            {
+                SpawnEnemies();
+            }
+            else
+            {
+                TestSpawn();
+            }
 
-			timer = 0;
-		}
+            spawnTimer = 0;
+        }
 
-		timer += Time.deltaTime;
-	}
+        spawnTimer += Time.deltaTime;
+    }
 
 	private void TestSpawn()
 	{
@@ -92,25 +66,22 @@ public class EnemyManager : MonoBehaviour
 
 	private void SpawnEnemies()
 	{
-		GameObject enemy = GetDisabledEnemy(enemies);
-
-		if (enemy != null)
-		{
-			enemy.SetActive(true);
-		}
+		EnemyBase enemy = GetEnemy();
+        enemy.Reset();
 	}
 
-	private GameObject GetDisabledEnemy(GameObject[] enemyArray)
+	private EnemyBase GetEnemy()
 	{
-		foreach (GameObject enemy in enemyArray)
-		{
-			if (enemy.activeSelf == false)
-			{
-				return enemy;
-			}
-		}
+        EnemyBase SelectedEnemy = enemyPool.FirstOrDefault(x => x.IsAlive == true);
+        if (SelectedEnemy)
+            return SelectedEnemy;
 
-		return null;
+        GameObject newEnemy = Instantiate(SpawnAbleEnemies[Random.Range(0, SpawnAbleEnemies.Length)]);
+
+        SelectedEnemy = newEnemy.GetComponent<EnemyBase>();
+        enemyPool.Add(SelectedEnemy);
+
+        return SelectedEnemy;
 	}
 
 	private Vector3 RandomPos()
@@ -129,10 +100,25 @@ public class EnemyManager : MonoBehaviour
 	}
 
 #if UNITY_EDITOR
-	private Vector3 tmpMax;
+    public Vector3 SpawnMin
+    {
+        get { return spawnMin; }
+        set { spawnMin = value; }
+    }
+
+    public Vector3 SpawnMax
+    {
+        get { return spawnMax; }
+        set { spawnMax = value; }
+    }
+
+    private Vector3 tmpMax;
 	private Vector3 tmpMin;
 
-	public void OnDrawGizmosSelected()
+    [SerializeField]
+    private Color lineColor;
+
+    public void OnDrawGizmosSelected()
 	{
 		tmpMax = transform.position + spawnMax;
 		tmpMin = transform.position + spawnMin;

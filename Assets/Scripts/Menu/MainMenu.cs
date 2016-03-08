@@ -3,12 +3,13 @@
 using UnityEngine;
 using System.Collections;
 
-public class MainMenu : MonoBehaviour {
+public class MainMenu : MonoBehaviour
+{
 
     [SerializeField]
     OptionsMenu options;
 
-	public void Options(bool open)
+    public void Options(bool open)
     {
         options.OpenMenu();
     }
@@ -20,7 +21,7 @@ public class MainMenu : MonoBehaviour {
 
     public void StartGame()
     {
-
+        SceneControler.Load("LocalGame");
     }
 
     //int frame;
@@ -35,7 +36,7 @@ public class MainMenu : MonoBehaviour {
     //        time = 0;
     //        Util.Debugger.Log("FPS", frame);
     //        frame = 0;
-           
+
     //    }
     //}
 }
