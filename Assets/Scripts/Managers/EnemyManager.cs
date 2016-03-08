@@ -19,9 +19,11 @@ public class EnemyManager : MonoBehaviour
 
     private float spawnTimer;
 
-	protected void Start ()
+	protected void Awake ()
 	{
         enemyPool = new List<EnemyBase>();
+        if (SpawnAbleEnemies == null)
+            SpawnAbleEnemies = new GameObject[0];
 	}
 
     protected void Update()
@@ -68,16 +70,22 @@ public class EnemyManager : MonoBehaviour
 	{
 		EnemyBase enemy = GetEnemy();
         enemy.Reset();
+        enemy.Rigibody.velocity = new Vector3(0, 0, -2);
+        enemy.transform.localPosition = RandomPos();
 	}
 
 	private EnemyBase GetEnemy()
 	{
-        EnemyBase SelectedEnemy = enemyPool.FirstOrDefault(x => x.IsAlive == true);
-        if (SelectedEnemy)
-            return SelectedEnemy;
+        EnemyBase SelectedEnemy;
+        if (enemyPool.Count > 0 && enemyPool.Any(x => x.IsRemoved == true))
+        {
+            SelectedEnemy = enemyPool.First(x => x.IsRemoved == true);
+            if (SelectedEnemy)
+                return SelectedEnemy;
+        }
 
         GameObject newEnemy = Instantiate(SpawnAbleEnemies[Random.Range(0, SpawnAbleEnemies.Length)]);
-
+        newEnemy.transform.SetParent(transform, false);
         SelectedEnemy = newEnemy.GetComponent<EnemyBase>();
         enemyPool.Add(SelectedEnemy);
 
