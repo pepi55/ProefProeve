@@ -6,7 +6,7 @@ using System.Collections;
 
 public class PlayerStats {
 
-    private static float _playerHealth;
+    private static float _playerHealth = 100;
     public static float playerHealth
     {
         get { return _playerHealth; }
