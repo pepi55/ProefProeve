@@ -3,28 +3,46 @@
 using UnityEngine;
 using System.Collections;
 
-
+[RequireComponent(typeof(Rigidbody),typeof(BoxCollider))]
 public class EnemyBase : MonoBehaviour
 {
     private Renderer render;
-    private Color TmpColor;
-    bool RemoveEnum;
+    public Renderer Render
+    {
+        get
+        {
+            if (render == null)
+                render = GetComponent<Renderer>();
+            return render;
+        }
+    }
 
+    private Rigidbody rigibody;
+    public Rigidbody Rigibody { get { return rigibody; } }
+    private Color TmpColor;
+    bool RemveActive;
+
+    public bool IsAlive { get; private set; }
+    public bool IsRemoved { get; private set; }
 
     private void Awake()
     {
         render = GetComponent<Renderer>();
         render.material.color = Color.red;
-        IsAlive = true;
-    }
 
-	public bool IsAlive { get; private set; }
+        rigibody = GetComponent<Rigidbody>();
+        rigibody.useGravity = false;
+
+        IsAlive = true;
+    }	
 
     public void Reset()
     {
         IsAlive = true;
-        render.material.color = Color.red;
+        IsRemoved = false;
+        Render.material.color = Color.red;
         gameObject.SetActive(true);
+        GetComponent<BoxCollider>().enabled = true;
     }
 
     private void Update()
@@ -42,18 +60,27 @@ public class EnemyBase : MonoBehaviour
 		IsAlive = false;
 
 		GetComponent<Rigidbody>().velocity = Vector3.zero;
-        GetComponent<Renderer>().material.color = Color.blue;
+        render.material.color = Color.blue;
 
         GetComponent<BoxCollider>().enabled = false;
+
+        Remove(3);
     }
 
     public void Remove(float delay)
     {
-
+        StartCoroutine(RemoveDelay(delay));
     }
 
     IEnumerator RemoveDelay(float delay)
     {
-        yield return new WaitForSeconds(delay);
+        if (!RemveActive)
+        {
+            RemveActive = true;
+            yield return new WaitForSeconds(delay);
+            RemveActive = false;
+            IsRemoved = true;
+            gameObject.SetActive(false);
+        }
     }
 }
