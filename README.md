@@ -38,3 +38,6 @@ Proef PvB
  * Warnings should be treated as errors.
  * Always commit a working build.
  * Always add protection level to method/variable.
+
+## Contributors
+Joost Voss, Dejorden Moerman, Sander de Boer, Angelina Medu, Jesse Stam, Petar Dimitrov.
