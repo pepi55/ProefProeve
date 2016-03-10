@@ -20,10 +20,13 @@ public class EnemyBase : MonoBehaviour
     private Rigidbody rigibody;
     public Rigidbody Rigibody { get { return rigibody; } }
     private Color TmpColor;
-    bool RemveActive;
+    bool removeActive;
 
     public bool IsAlive { get; private set; }
     public bool IsRemoved { get; private set; }
+
+    //This needs a better name
+    EnemyBaseInterface Action;
 
     private void Awake()
     {
@@ -74,13 +77,18 @@ public class EnemyBase : MonoBehaviour
 
     IEnumerator RemoveDelay(float delay)
     {
-        if (!RemveActive)
+        if (!removeActive)
         {
-            RemveActive = true;
+            removeActive = true;
             yield return new WaitForSeconds(delay);
-            RemveActive = false;
+            removeActive = false;
             IsRemoved = true;
             gameObject.SetActive(false);
         }
+    }
+
+    public void isHit()
+    {
+        Remove(0.3f);
     }
 }
