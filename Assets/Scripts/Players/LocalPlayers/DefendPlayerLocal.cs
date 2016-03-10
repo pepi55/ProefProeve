@@ -34,4 +34,8 @@ public class DefendPlayerLocal : PlayerLocalBehaviour, IPlayerBehaviour
 			Move(_playerDirection);
 		}
 	}
+
+	public override void Ability1()
+	{
+	}
 }

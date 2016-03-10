@@ -6,20 +6,20 @@ using System.Collections;
 
 public class Game_UIControler : MonoBehaviour {
 
-    [SerializeField]
-    StatusBar PlayerHealth;
-    [SerializeField]
-    StatusBar SuperAttackChargeBar;
+	[SerializeField]
+	StatusBar PlayerHealth;
+	[SerializeField]
+	StatusBar SuperAttackChargeBar;
 
-    private float Player;
-    private void Start()
-    {
+	private float Player;
+	private void Start()
+	{
 
-    }
+	}
 
-    private void Update()
-    {
-        PlayerHealth.Value = PlayerStats.playerHealth/100f;
-        SuperAttackChargeBar.Value = Mathf.PingPong(Time.time - 0.5f, 1f);
-    }
+	private void Update()
+	{
+		PlayerHealth.Value = PlayerStats.PlayerHealth/100f;
+		SuperAttackChargeBar.Value = Mathf.PingPong(Time.time - 0.5f, 1f);
+	}
 }

@@ -2,7 +2,6 @@
 // Date: 23/02/2016
 
 using UnityEngine;
-using Events;
 
 /// <summary>
 /// Attack player for local play.
@@ -12,6 +11,11 @@ public class AttackPlayerLocal : PlayerLocalBehaviour
 	protected void Update ()
 	{
 		_playerDirection = Vector2.zero;
+
+		if (Input.GetKeyDown(KeyCode.F))
+		{
+			Ability1();
+		}
 
 		if (Input.GetKey(KeyCode.D))
 		{
@@ -36,6 +40,20 @@ public class AttackPlayerLocal : PlayerLocalBehaviour
 		if (_playerDirection != Vector2.zero)
 		{
 			Move(_playerDirection);
+		}
+	}
+
+	public override void Ability1()
+	{
+		LayerMask mask = LayerMask.NameToLayer("Enemy");
+		RaycastHit[] hits = Physics.BoxCastAll(Vector3.zero, Vector3.one, Vector3.forward, Quaternion.identity, 3.0f, mask);
+
+		if (hits.Length > 0)
+		{
+			foreach (RaycastHit hit in hits)
+			{
+				hit.collider.transform.gameObject.SendMessage("isHit", SendMessageOptions.DontRequireReceiver);
+			}
 		}
 	}
 }

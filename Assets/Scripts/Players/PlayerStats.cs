@@ -1,22 +1,19 @@
 ﻿//Author Jesse Stam
 //7-3-2016
 
-using UnityEngine;
-using System.Collections;
+public static class PlayerStats
+{
+	private static float _playerHealth = 100;
+	public static float PlayerHealth
+	{
+		get { return _playerHealth; }
+		set { _playerHealth = value; }
+	}
 
-public class PlayerStats {
-
-    private static float _playerHealth = 100;
-    public static float playerHealth
-    {
-        get { return _playerHealth; }
-        set { _playerHealth = value; }
-    }
-
-    private static float _superAttack;
-    public static float superAttack
-    {
-        get { return _superAttack; }
-        set { _superAttack = value; }
-    }
+	private static float _superAttack;
+	public static float SuperAttack
+	{
+		get { return _superAttack; }
+		set { _superAttack = value; }
+	}
 }
