@@ -13,7 +13,7 @@ public class PlayerLocalBehaviour : MonoBehaviour, IPlayerBehaviour
 	protected Vector2 _playerDirection;
 	private int playerSpeed;
 
-	protected void Start ()
+	protected virtual void Start ()
 	{
 		_playerDirection = new Vector2();
 		playerSpeed = 5;

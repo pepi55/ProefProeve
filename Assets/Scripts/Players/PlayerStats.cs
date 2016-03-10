@@ -10,10 +10,5 @@ public static class PlayerStats
 		set { _playerHealth = value; }
 	}
 
-	private static float _superAttack;
-	public static float SuperAttack
-	{
-		get { return _superAttack; }
-		set { _superAttack = value; }
-	}
+	public static float SuperAttack { get; set; }
 }
