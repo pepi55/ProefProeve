@@ -7,7 +7,9 @@ public class BaseProjectile : MonoBehaviour
     public bool IsRemoved { get; private set; }
     private bool removeActive;
 
+    [SerializeField]
     new SphereCollider collider;
+    [SerializeField]
     new public Rigidbody rigidbody { get; private set; }
 
     void Awake()
