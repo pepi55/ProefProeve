@@ -9,7 +9,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 497384}
   - 65: {fileID: 6516410}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Shield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28,7 +28,7 @@ GameObject:
   - 65: {fileID: 6555378}
   - 23: {fileID: 2387196}
   - 114: {fileID: 11435482}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: DefendPlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47,7 +47,7 @@ GameObject:
   - 65: {fileID: 6533218}
   - 23: {fileID: 2361638}
   - 114: {fileID: 11471016}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AttackPlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
