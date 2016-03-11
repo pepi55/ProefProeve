@@ -17,8 +17,8 @@ public class EnemyBase : MonoBehaviour
         }
     }
 
-    private Rigidbody rigibody;
-    public Rigidbody Rigibody { get { return rigibody; } }
+    new private Rigidbody rigidbody;
+    public Rigidbody Rigidbody { get { return rigidbody; } }
     private Color TmpColor;
     bool removeActive;
 
@@ -33,10 +33,12 @@ public class EnemyBase : MonoBehaviour
         render = GetComponent<Renderer>();
         render.material.color = Color.white;
 
-        rigibody = GetComponent<Rigidbody>();
-        rigibody.useGravity = false;
+        rigidbody = GetComponent<Rigidbody>();
+        rigidbody.useGravity = false;
 
         IsAlive = true;
+
+        Action = new EnemyBasicShoot();
     }	
 
     public void Reset()
@@ -46,6 +48,7 @@ public class EnemyBase : MonoBehaviour
         Render.material.color = Color.white;
         gameObject.SetActive(true);
         GetComponent<BoxCollider>().enabled = true;
+        Action = new EnemyBasicShoot();
     }
 
     private void Update()
@@ -56,19 +59,21 @@ public class EnemyBase : MonoBehaviour
             TmpColor /= 3f * Time.deltaTime;
             render.material.color = TmpColor;
         }
+
+        Action.DoAction(gameObject);
     }
 
 	private void OnTriggerEnter(Collider other)
 	{
-		IsAlive = false;
-
-		GetComponent<Rigidbody>().velocity = Vector3.zero;
-        render.material.color = Color.blue;
-
-        GetComponent<BoxCollider>().enabled = false;
+		
 
         Remove(3);
+
+        if (other.gameObject.layer == LayerMask.NameToLayer("Analilation Plane"))
+            Remove(0);
     }
+
+
 
     public void Remove(float delay)
     {
@@ -79,6 +84,12 @@ public class EnemyBase : MonoBehaviour
     {
         if (!removeActive)
         {
+            IsAlive = false;
+
+            rigidbody.velocity = Vector3.zero;
+            render.material.color = Color.blue;
+            GetComponent<BoxCollider>().enabled = false;
+
             removeActive = true;
             yield return new WaitForSeconds(delay);
             removeActive = false;

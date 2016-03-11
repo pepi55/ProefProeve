@@ -8,24 +8,36 @@ public class BaseProjectile : MonoBehaviour
     private bool removeActive;
 
     new SphereCollider collider;
-    Rigidbody rigibody;
-    void Start()
+    new public Rigidbody rigidbody { get; private set; }
+
+    void Awake()
     {
-        Reset();
+       
         collider = GetComponent<SphereCollider>();
-        rigibody = GetComponent<Rigidbody>();
+        rigidbody = GetComponent<Rigidbody>();
+
+        rigidbody.useGravity = false;
+
+        Reset();
     }
 
     public void Reset()
     {
         IsAlive = true;
         IsRemoved = false;
+        collider.enabled = true;
         gameObject.SetActive(true);
     }
 
     public void OnCollisionEnter(Collision collision)
     {
         Remove(0.3f);
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Analilation Plane"))
+            Remove(0);
     }
 
     public void Remove(float delay)
@@ -39,6 +51,7 @@ public class BaseProjectile : MonoBehaviour
         {
             removeActive = true;
             collider.enabled = false;
+            rigidbody.velocity = Vector3.zero;
 
             yield return new WaitForSeconds(delay);
             removeActive = false;
