@@ -5,6 +5,7 @@ using UnityEngine;
 using System.Linq;
 using System.Collections.Generic;
 
+[RequireComponent (typeof(Rigidbody))]
 public class BulletManager : MonoBehaviour
 {
     private static BulletManager instance;
@@ -14,6 +15,7 @@ public class BulletManager : MonoBehaviour
 
    [SerializeField] private BaseProjectile PlayerProjectile = null;
    [SerializeField] private BaseProjectile EnemyProjectile  = null;
+  
 
     void Awake()
     {
@@ -42,6 +44,8 @@ public class BulletManager : MonoBehaviour
         }
 
         GameObject NewBulletGameObject = Instantiate(instance.PlayerProjectile.gameObject);
+        NewBulletGameObject.transform.SetParent(instance.transform);
+
         BaseProjectile NewBullet = NewBulletGameObject.GetComponent<BaseProjectile>();
 
         instance.PlayerProjectileList.Add(NewBullet);
@@ -60,6 +64,8 @@ public class BulletManager : MonoBehaviour
         }
 
         GameObject NewBulletGameObject = Instantiate(instance.EnemyProjectile.gameObject);
+        NewBulletGameObject.transform.SetParent(instance.transform);
+
         BaseProjectile NewBullet = NewBulletGameObject.GetComponent<BaseProjectile>();
 
         instance.EnemyProjectileList.Add(NewBullet);
