@@ -31,6 +31,7 @@ public class BulletManager : MonoBehaviour
         {
             GameObject g = new GameObject("Bullet Manager");
             BulletManager bm = g.AddComponent<BulletManager>();
+            instance = bm;
         }
     }
 

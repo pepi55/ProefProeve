@@ -20,7 +20,7 @@ public class EnemyBasicShoot : EnemyBaseInterface
 
             p.transform.position = Entity.transform.position;
             p.Reset();
-            p.rigidbody.velocity = Vector3.back * 3f;
+            p.rigidbody.velocity = Vector3.back * (8f + Random.Range(0f,0.5f));
         }
     }
 }
