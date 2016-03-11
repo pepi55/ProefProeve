@@ -167,19 +167,19 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 99b6ef6d4e00614409a2313615a40359, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.000000053385083
+      value: 0.7071066
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 99b6ef6d4e00614409a2313615a40359, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.7071068
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 99b6ef6d4e00614409a2313615a40359, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.7071068
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 99b6ef6d4e00614409a2313615a40359, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.000000053385083
+      value: -0.70710695
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 99b6ef6d4e00614409a2313615a40359, type: 3}
       propertyPath: m_RootOrder
@@ -197,6 +197,10 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: 0.9
       objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: 99b6ef6d4e00614409a2313615a40359, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 32fe9afb0dbc87c4cb21247e962d4870, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 99b6ef6d4e00614409a2313615a40359, type: 3}
   m_IsPrefabParent: 0
@@ -212,6 +216,7 @@ GameObject:
   - 92: {fileID: 690251157}
   - 124: {fileID: 690251156}
   - 81: {fileID: 690251155}
+  - 114: {fileID: 690251160}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -269,7 +274,7 @@ Camera:
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
   m_TargetEye: 3
-  m_HDR: 0
+  m_HDR: 1
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
@@ -280,12 +285,28 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 690251154}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalRotation: {x: 0.11321354, y: 0.683536, z: -0.10855558, w: 0.7128653}
+  m_LocalPosition: {x: -2.0014894, y: 1.3551273, z: 0.493}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!114 &690251160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 690251154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c12500f3afdeb24d9444042960a4cb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bloomIntensity: 0.1
+  shader: {fileID: 4800000, guid: 6581f8d2f208b8340b8d59c7bf38cc9a, type: 3}
+  lensDirtTexture: {fileID: 0}
+  lensDirtIntensity: 0
+  inputIsHDR: 1
 --- !u!1 &1401229864
 GameObject:
   m_ObjectHideFlags: 0
@@ -353,6 +374,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: c606f36c50dd0e443aa5c7a667ff2acd, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c12e3e33f95789a4f88a5ac1785a66b9, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c606f36c50dd0e443aa5c7a667ff2acd, type: 3}
   m_IsPrefabParent: 0
