@@ -73,7 +73,6 @@ public class DefendPlayerLocal : PlayerLocalBehaviour, IPlayerBehaviour
 		while (ShieldCooldown >= 0.0f)
 		{
 			ShieldCooldown -= Time.deltaTime;
-			Debug.Log(ShieldCooldown);
 			yield return new WaitForEndOfFrame();
 		}
 	}
