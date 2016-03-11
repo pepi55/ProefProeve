@@ -65,12 +65,10 @@ public class EnemyBase : MonoBehaviour
 
 	private void OnTriggerEnter(Collider other)
 	{
-		
-
-        Remove(3);
-
         if (other.gameObject.layer == LayerMask.NameToLayer("Analilation Plane"))
             Remove(0);
+        else
+            Remove(3);
     }
 
 
