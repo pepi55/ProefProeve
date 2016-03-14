@@ -6,7 +6,7 @@ using System.Collections;
 
 public class DefendPlayerLocal : PlayerLocalBehaviour, IPlayerBehaviour
 {
-	[SerializeField] GameObject playerShield;
+	[SerializeField] private GameObject playerShield;
 
 	public float ShieldCooldown { get; private set; }
 
@@ -25,6 +25,11 @@ public class DefendPlayerLocal : PlayerLocalBehaviour, IPlayerBehaviour
 		if (Input.GetKeyDown(KeyCode.RightControl))
 		{
 			Ability1();
+		}
+
+		if (Input.GetKeyDown(KeyCode.LeftShift))
+		{
+			Ability2();
 		}
 
 		if (Input.GetKey(KeyCode.RightArrow))

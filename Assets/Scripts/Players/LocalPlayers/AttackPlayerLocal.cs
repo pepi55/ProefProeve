@@ -17,6 +17,11 @@ public class AttackPlayerLocal : PlayerLocalBehaviour
 			Ability1();
 		}
 
+		if (Input.GetKeyDown(KeyCode.RightShift))
+		{
+			Ability2();
+		}
+
 		if (Input.GetKey(KeyCode.D))
 		{
 			_playerDirection += Vector2.right;
