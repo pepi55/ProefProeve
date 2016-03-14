@@ -73,8 +73,8 @@ public class BackgroundGrid : MonoBehaviour
 
             lin = new Line(game.transform, rndr);
 
-            lin.renderer.SetPosition(0, new Vector3(-100, offSetY,0));
-            lin.renderer.SetPosition(1, new Vector3(100, offSetY, 0));
+            lin.renderer.SetPosition(0, new Vector3((linesX - 1) * GridDensity.x / -2f, offSetY, 0));
+            lin.renderer.SetPosition(1, new Vector3((linesX - 1) * GridDensity.x / 2f, offSetY, 0));
             lin.renderer.SetWidth(lineWidth, lineWidth);
             lin.renderer.useWorldSpace = false;
 
@@ -99,7 +99,7 @@ public class BackgroundGrid : MonoBehaviour
             SelectedLine = LinesOnZ[i];
 
             if (SelectedLine.transform.localPosition.z < MaxZDepth)
-                SelectedLine.transform.position = new Vector3(0, 0, (LinesOnZ.Count * GridDensity.y) + MaxZDepth);
+                SelectedLine.transform.position += new Vector3(0, 0, (LinesOnZ.Count * GridDensity.y) + MaxZDepth);
 
             SelectedLine.transform.Translate(new Vector3(0, 0, MoveSpeed) * Time.deltaTime);
         }
