@@ -5,7 +5,7 @@ Proef PvB
 ### Code Conventions
  * Enter Bracket
  * Folders are UpperCamelCase.
- * __No one letter variables.__
+ * __No one letter variables.__ (Except in for loops.)
  * __No public variables, use properties.__
  
  Auto generated:
