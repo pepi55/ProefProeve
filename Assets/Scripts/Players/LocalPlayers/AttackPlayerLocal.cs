@@ -56,7 +56,6 @@ public class AttackPlayerLocal : PlayerLocalBehaviour
 	public override void TakeDmg (float val)
 	{
 		PlayerHealth -= val;
-		Debug.Log(val + "\n" + PlayerHealth);
 
 		base.TakeDmg(val);
 	}

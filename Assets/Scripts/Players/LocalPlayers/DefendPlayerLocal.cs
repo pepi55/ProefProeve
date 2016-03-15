@@ -67,7 +67,6 @@ public class DefendPlayerLocal : PlayerLocalBehaviour, IPlayerBehaviour
 	public override void TakeDmg (float val)
 	{
 		PlayerHealth -= ((val / 5) * 4);
-		Debug.Log((val / 5) * 4 + "\n" + PlayerHealth);
 
 		base.TakeDmg(val);
 	}
