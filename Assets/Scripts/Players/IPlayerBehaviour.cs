@@ -1,7 +1,6 @@
 ﻿// Created by: Petar Dimitrov.
 // Date: 22/02/2016
 
-using Events;
 using UnityEngine;
 
 /// <summary>
@@ -14,6 +13,11 @@ public interface IPlayerBehaviour
 	/// </summary>
 	/// <param name="dir">The direction to move the player in.</param>
 	void Move(Vector2 dir);
+
+	/// <summary>
+	/// Checks if player is dead.
+	/// </summary>
+	void IsDead();
 
 	/// <summary>
 	/// The first player ability.

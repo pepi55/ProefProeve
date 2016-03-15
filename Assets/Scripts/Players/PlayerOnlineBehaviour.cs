@@ -35,6 +35,13 @@ public class PlayerOnlineBehaviour : NetworkBehaviour, IPlayerBehaviour
 	}
 
 	/// <summary>
+	/// Implementation of <see cref="IPlayerBehaviour.IsDead()"/>.
+	/// </summary>
+	public void IsDead ()
+	{
+	}
+
+	/// <summary>
 	/// Implementation of <see cref="IPlayerBehaviour.Ability1()"/>.
 	/// </summary>
 	public void Ability1 ()

@@ -16,12 +16,17 @@ public class PlayerLocalBehaviour : MonoBehaviour, IPlayerBehaviour
 
 	private int playerSpeed;
 
+	protected void Awake ()
+	{
+		playerUltActivations = new Dictionary<int, bool>();
+	}
+
 	protected virtual void Start ()
 	{
 		_playerDirection = new Vector2();
 
-		playerUltActivations = new Dictionary<int, bool>();
 		playerUltActivations.Add(gameObject.GetInstanceID(), false);
+		Debug.Log(playerUltActivations.Count);
 
 		playerSpeed = 5;
 	}
@@ -36,6 +41,18 @@ public class PlayerLocalBehaviour : MonoBehaviour, IPlayerBehaviour
 	}
 
 	/// <summary>
+	/// Implementation of <see cref="IPlayerBehaviour.IsDead()"/>.
+	/// </summary>
+	public void IsDead ()
+	{
+		if (PlayerHealth <= 0.0f)
+		{
+			Destroy(gameObject);
+		}
+	}
+
+	/// <summary>
+	/// Handles player specific ability.
 	/// Implementation of <see cref="IPlayerBehaviour.Ability1()"/>.
 	/// </summary>
 	public virtual void Ability1 ()
@@ -43,6 +60,7 @@ public class PlayerLocalBehaviour : MonoBehaviour, IPlayerBehaviour
 	}
 
 	/// <summary>
+	/// Handles the Ult ability.
 	/// Implementation of <see cref="IPlayerBehaviour.Ability2()"/>.
 	/// </summary>
 	public virtual void Ability2 ()
@@ -62,7 +80,6 @@ public class PlayerLocalBehaviour : MonoBehaviour, IPlayerBehaviour
 			foreach (KeyValuePair<int, bool> ultActive in playerUltActivations)
 			{
 				Debug.Log("Key: " + ultActive.Key + " Value: " + ultActive.Value);
-				Debug.Log(playerUltActivations.Count);
 				if (ultActive.Value == false)
 				{
 					return;
