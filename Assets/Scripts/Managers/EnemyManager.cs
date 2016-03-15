@@ -7,24 +7,30 @@ using System.Linq;
 
 public class EnemyManager : MonoBehaviour
 {
+	[SerializeField] private List<EnemyBase> spawnableBosses;
 	[SerializeField] private Vector3 spawnMin;
 	[SerializeField] private Vector3 spawnMax;
 	[SerializeField] private float spawnRate;
 
-	[SerializeField, Tooltip("A List of the enemies that can be spawned")]private GameObject[] SpawnAbleEnemies;
+	[SerializeField, Tooltip("A List of the enemies that can be spawned")] private GameObject[] spawnableEnemies;
 	[SerializeField, Tooltip("time in seconds")] private float SpawnDelay;
 
 	private List<EnemyBase> enemyPool;
 
+	private float timeSinceGameStart;
 	private float spawnTimer;
+
+	private bool bossActive;
 
 	protected void Awake ()
 	{
 		enemyPool = new List<EnemyBase>();
 
-		if (SpawnAbleEnemies == null)
+		bossActive = false;
+
+		if (spawnableEnemies == null)
 		{
-			SpawnAbleEnemies = new GameObject[0];
+			spawnableEnemies = new GameObject[0];
 		}
 	}
 
@@ -32,13 +38,21 @@ public class EnemyManager : MonoBehaviour
 	{
 		// Enemies respawn at an exponential decay rate (spawn faster depending on how
 		// long you have been playing).
-		if (spawnTimer > 0.5f + (5.0f * Mathf.Exp(-Time.time / spawnRate)))
+		if (spawnTimer > 0.5f + (5.0f * Mathf.Exp(-timeSinceGameStart / spawnRate)))
 		{
-			if (SpawnAbleEnemies.Length > 0)
+			if (bosses.Count > 0)
+			{
+				if (timeSinceGameStart % 30 == 0)
+				{
+					SpawnBoss();
+				}
+			}
+
+			if (spawnableEnemies.Length > 0 && !bossActive)
 			{
 				SpawnEnemies();
 			}
-			else
+			else if (!bossActive)
 			{
 				TestSpawn();
 			}
@@ -47,6 +61,7 @@ public class EnemyManager : MonoBehaviour
 		}
 
 		spawnTimer += Time.deltaTime;
+		timeSinceGameStart += Time.deltaTime;
 	}
 
 	private void TestSpawn()
@@ -78,17 +93,25 @@ public class EnemyManager : MonoBehaviour
 		enemy.transform.localPosition = RandomPos();
 	}
 
+	private EnemyBase SpawnBoss()
+	{
+		// TODO: Make new Boss class, Spawn new Boss class.
+	}
+
 	private EnemyBase GetEnemy()
 	{
 		EnemyBase SelectedEnemy;
+
 		if (enemyPool.Count > 0 && enemyPool.Any(x => x.IsRemoved == true))
 		{
 			SelectedEnemy = enemyPool.First(x => x.IsRemoved == true);
 			if (SelectedEnemy)
+			{
 				return SelectedEnemy;
+			}
 		}
 
-		GameObject newEnemy = Instantiate(SpawnAbleEnemies[Random.Range(0, SpawnAbleEnemies.Length)]);
+		GameObject newEnemy = Instantiate(spawnableEnemies[Random.Range(0, spawnableEnemies.Length)]);
 		newEnemy.transform.SetParent(transform, false);
 		SelectedEnemy = newEnemy.GetComponent<EnemyBase>();
 		enemyPool.Add(SelectedEnemy);
