@@ -48,7 +48,7 @@ public class AttackPlayerLocal : PlayerLocalBehaviour
 		}
 	}
 
-	public override void Ability1()
+	public override void Ability1 ()
 	{
 		int mask = 1 << LayerMask.NameToLayer("Enemy");
 		RaycastHit[] hits = Physics.BoxCastAll(transform.position, Vector3.one, Vector3.forward, Quaternion.identity, 3.0f, mask);

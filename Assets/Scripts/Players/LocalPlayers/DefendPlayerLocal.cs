@@ -59,7 +59,7 @@ public class DefendPlayerLocal : PlayerLocalBehaviour, IPlayerBehaviour
 		}
 	}
 
-	public override void Ability1()
+	public override void Ability1 ()
 	{
 		if (ShieldCooldown <= 0.0f)
 		{

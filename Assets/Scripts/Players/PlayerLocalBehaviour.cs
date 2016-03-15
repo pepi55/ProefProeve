@@ -11,24 +11,21 @@ public class PlayerLocalBehaviour : MonoBehaviour, IPlayerBehaviour
 {
 	public static float PlayerHealth { get { return PlayerStats.PlayerHealth; } private set { PlayerStats.PlayerHealth = value; } }
 
+	protected static Dictionary<int, bool> _playerUltActivations;
 	protected Vector2 _playerDirection;
-	protected static Dictionary<int, bool> playerUltActivations;
 
 	private int playerSpeed;
 
 	protected void Awake ()
 	{
-		playerUltActivations = new Dictionary<int, bool>();
+		_playerUltActivations = new Dictionary<int, bool>();
+		_playerDirection = new Vector2();
 	}
 
 	protected virtual void Start ()
 	{
-		_playerDirection = new Vector2();
-
-		playerUltActivations.Add(gameObject.GetInstanceID(), false);
-		Debug.Log(playerUltActivations.Count);
-
 		playerSpeed = 5;
+		_playerUltActivations.Add(gameObject.GetInstanceID(), false);
 	}
 
 	/// <summary>
@@ -65,22 +62,24 @@ public class PlayerLocalBehaviour : MonoBehaviour, IPlayerBehaviour
 	/// </summary>
 	public virtual void Ability2 ()
 	{
-		if (playerUltActivations.Count > 0)
+		if (_playerUltActivations.Count > 0)
 		{
 			int id = gameObject.GetInstanceID();
 
-			if (!playerUltActivations.ContainsKey(id))
+			if (!_playerUltActivations.ContainsKey(id))
 			{
 				Debug.LogError("No current player key present.");
 				return;
 			}
 
-			playerUltActivations[id] = true;
+			Debug.Log(_playerUltActivations[id]);
+			_playerUltActivations[id] = true;
 
-			foreach (KeyValuePair<int, bool> ultActive in playerUltActivations)
+			foreach (KeyValuePair<int, bool> ultActive in _playerUltActivations)
 			{
 				Debug.Log("Key: " + ultActive.Key + " Value: " + ultActive.Value);
-				if (ultActive.Value == false)
+				/// FIXME: Not all values are reset back to false causing multiple ult activations.
+				if (!ultActive.Value)
 				{
 					return;
 				}
@@ -88,7 +87,8 @@ public class PlayerLocalBehaviour : MonoBehaviour, IPlayerBehaviour
 
 			Debug.Log("Rip Jan");
 
-			playerUltActivations[id] = false;
+			_playerUltActivations[id] = false;
+			Debug.Log(_playerUltActivations[id]);
 		}
 	}
 }
