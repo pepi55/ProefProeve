@@ -40,7 +40,7 @@ public class EnemyManager : MonoBehaviour
 		// long you have been playing).
 		if (spawnTimer > 0.5f + (5.0f * Mathf.Exp(-timeSinceGameStart / spawnRate)))
 		{
-			if (bosses.Count > 0)
+			if (spawnableBosses.Count > 0)
 			{
 				if (timeSinceGameStart % 30 == 0)
 				{
@@ -96,6 +96,7 @@ public class EnemyManager : MonoBehaviour
 	private EnemyBase SpawnBoss()
 	{
 		// TODO: Make new Boss class, Spawn new Boss class.
+		return new EnemyBase();
 	}
 
 	private EnemyBase GetEnemy()
