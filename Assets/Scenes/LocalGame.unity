@@ -128,30 +128,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 11417286, guid: 35c01ce881159bb489e1a435d64560fa, type: 2}
-      propertyPath: spawnMin.x
-      value: 10.809523
-      objectReference: {fileID: 0}
-    - target: {fileID: 11417286, guid: 35c01ce881159bb489e1a435d64560fa, type: 2}
-      propertyPath: spawnMin.y
-      value: 1.2366247
-      objectReference: {fileID: 0}
-    - target: {fileID: 11417286, guid: 35c01ce881159bb489e1a435d64560fa, type: 2}
-      propertyPath: spawnMin.z
-      value: 0.73594666
-      objectReference: {fileID: 0}
-    - target: {fileID: 11417286, guid: 35c01ce881159bb489e1a435d64560fa, type: 2}
-      propertyPath: spawnMax.x
-      value: -10.351886
-      objectReference: {fileID: 0}
-    - target: {fileID: 11417286, guid: 35c01ce881159bb489e1a435d64560fa, type: 2}
-      propertyPath: spawnMax.y
-      value: -2.562579
-      objectReference: {fileID: 0}
-    - target: {fileID: 11417286, guid: 35c01ce881159bb489e1a435d64560fa, type: 2}
-      propertyPath: spawnMax.z
-      value: -2.3401756
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 35c01ce881159bb489e1a435d64560fa, type: 2}
   m_IsPrefabParent: 0
