@@ -9,6 +9,7 @@ public class DefendPlayerLocal : PlayerLocalBehaviour, IPlayerBehaviour
 	[SerializeField] private GameObject playerShield;
 
 	public float ShieldCooldown { get; private set; }
+	public float StunCooldown { get; private set; }
 
 	protected override void Start ()
 	{
@@ -66,6 +67,14 @@ public class DefendPlayerLocal : PlayerLocalBehaviour, IPlayerBehaviour
 		}
 	}
 
+	private void Stun ()
+	{
+		if (StunCooldown <= 0.0f)
+		{
+			StartCoroutine(ActivateStun());
+		}
+	}
+
 	private IEnumerator ActivateShield ()
 	{
 		ShieldCooldown = 1.5f;
@@ -78,6 +87,28 @@ public class DefendPlayerLocal : PlayerLocalBehaviour, IPlayerBehaviour
 		while (ShieldCooldown >= 0.0f)
 		{
 			ShieldCooldown -= Time.deltaTime;
+			yield return new WaitForEndOfFrame();
+		}
+	}
+
+	private IEnumerator ActivateStun ()
+	{
+		StunCooldown = 2.0f;
+
+		int mask = 1 << LayerMask.NameToLayer("Enemy");
+		RaycastHit[] hits = Physics.BoxCastAll(transform.position, Vector3.one, Vector3.forward, Quaternion.identity, 3.0f, mask);
+
+		if (hits.Length > 0)
+		{
+			foreach (RaycastHit hit in hits)
+			{
+				hit.collider.transform.gameObject.SendMessage("isStunned", SendMessageOptions.DontRequireReceiver);
+			}
+		}
+
+		while (StunCooldown >= 0.0f)
+		{
+			StunCooldown-= Time.deltaTime;
 			yield return new WaitForEndOfFrame();
 		}
 	}
