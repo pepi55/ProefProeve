@@ -46,6 +46,19 @@ public class AttackPlayerLocal : PlayerLocalBehaviour
 		{
 			Move(_playerDirection);
 		}
+
+		if (Input.GetKeyDown(KeyCode.J))
+		{
+			TakeDmg(10.0f);
+		}
+	}
+
+	public override void TakeDmg (float val)
+	{
+		PlayerHealth -= val;
+		Debug.Log(val + "\n" + PlayerHealth);
+
+		base.TakeDmg(val);
 	}
 
 	public override void Ability1 ()

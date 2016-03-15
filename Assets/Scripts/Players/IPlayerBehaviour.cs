@@ -15,9 +15,10 @@ public interface IPlayerBehaviour
 	void Move(Vector2 dir);
 
 	/// <summary>
-	/// Checks if player is dead.
+	/// Make player take damage.
 	/// </summary>
-	void IsDead();
+	/// <param name="val">The amount of damage to take.</param>
+	void TakeDmg(float val);
 
 	/// <summary>
 	/// The first player ability.

@@ -57,6 +57,19 @@ public class DefendPlayerLocal : PlayerLocalBehaviour, IPlayerBehaviour
 		{
 			Move(_playerDirection);
 		}
+
+		if (Input.GetKeyDown(KeyCode.H))
+		{
+			TakeDmg(10.0f);
+		}
+	}
+
+	public override void TakeDmg (float val)
+	{
+		PlayerHealth -= ((val / 5) * 4);
+		Debug.Log((val / 5) * 4 + "\n" + PlayerHealth);
+
+		base.TakeDmg(val);
 	}
 
 	public override void Ability1 ()

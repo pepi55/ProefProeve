@@ -35,9 +35,10 @@ public class PlayerOnlineBehaviour : NetworkBehaviour, IPlayerBehaviour
 	}
 
 	/// <summary>
-	/// Implementation of <see cref="IPlayerBehaviour.IsDead()"/>.
+	/// Implementation of <see cref="IPlayerBehaviour.TakeDmg(float)"/>.
 	/// </summary>
-	public void IsDead ()
+	/// <param name="val">The amount of damage to take.</param>
+	public virtual void TakeDmg (float val)
 	{
 	}
 

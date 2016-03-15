@@ -9,7 +9,7 @@ using System.Collections.Generic;
 /// </summary>
 public class PlayerLocalBehaviour : MonoBehaviour, IPlayerBehaviour
 {
-	public static float PlayerHealth { get { return PlayerStats.PlayerHealth; } private set { PlayerStats.PlayerHealth = value; } }
+	public static float PlayerHealth { get; protected set; }
 
 	protected static Dictionary<int, bool> _playerUltActivations;
 	protected Vector2 _playerDirection;
@@ -24,6 +24,7 @@ public class PlayerLocalBehaviour : MonoBehaviour, IPlayerBehaviour
 
 	protected virtual void Start ()
 	{
+		PlayerHealth = 100.0f;
 		playerSpeed = 5;
 		_playerUltActivations.Add(gameObject.GetInstanceID(), false);
 	}
@@ -38,9 +39,10 @@ public class PlayerLocalBehaviour : MonoBehaviour, IPlayerBehaviour
 	}
 
 	/// <summary>
-	/// Implementation of <see cref="IPlayerBehaviour.IsDead()"/>.
+	/// Implementation of <see cref="IPlayerBehaviour.TakeDmg(float)"/>.
 	/// </summary>
-	public void IsDead ()
+	/// <param name="val">The amount of damage to take.</param>
+	public virtual void TakeDmg (float val)
 	{
 		if (PlayerHealth <= 0.0f)
 		{
