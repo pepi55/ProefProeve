@@ -7,12 +7,13 @@ using System.Linq;
 
 public class EnemyManager : MonoBehaviour
 {
-	[SerializeField] private List<EnemyBase> spawnableBosses;
+	[SerializeField] private EnemyBase[] spawnableBosses;
 	[SerializeField] private Vector3 spawnMin;
 	[SerializeField] private Vector3 spawnMax;
 	[SerializeField] private float spawnRate;
 
-	[SerializeField, Tooltip("A List of the enemies that can be spawned")] private GameObject[] spawnableEnemies;
+	[SerializeField, Tooltip("A List of the enemies that can be spawned")]
+        private GameObject[] spawnableEnemies; // was hard to read as one long line
 	[SerializeField, Tooltip("time in seconds")] private float SpawnDelay;
 
 	private List<EnemyBase> enemyPool;
@@ -40,7 +41,7 @@ public class EnemyManager : MonoBehaviour
 		// long you have been playing).
 		if (spawnTimer > 0.5f + (5.0f * Mathf.Exp(-timeSinceGameStart / spawnRate)))
 		{
-			if (spawnableBosses.Count > 0)
+			if (spawnableBosses.Length > 0)
 			{
 				if (timeSinceGameStart % 30 == 0)
 				{
@@ -95,8 +96,12 @@ public class EnemyManager : MonoBehaviour
 
 	private EnemyBase SpawnBoss()
 	{
-		// TODO: Make new Boss class, Spawn new Boss class.
-		return new EnemyBase();
+        EnemyBase SelectedEnemy;
+
+        GameObject newEnemy = Instantiate(spawnableEnemies[Random.Range(0, spawnableBosses.Length)]);
+        newEnemy.transform.SetParent(transform, false);
+        SelectedEnemy = newEnemy.GetComponent<EnemyBase>();
+        return SelectedEnemy;
 	}
 
 	private EnemyBase GetEnemy()

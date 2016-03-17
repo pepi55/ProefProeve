@@ -22,6 +22,7 @@ public class EnemyBase : MonoBehaviour
 	public Rigidbody Rigidbody { get { return rigidbody; } }
 	private Color TmpColor;
 	bool removeActive;
+    bool isStunnedNow = false;
 
 	public bool IsAlive { get; private set; }
 	public bool IsRemoved { get; private set; }
@@ -52,17 +53,19 @@ public class EnemyBase : MonoBehaviour
 		Action = new EnemyBasicShoot();
 	}
 
-	private void Update()
-	{
-		if(!IsAlive)
-		{
-			TmpColor = render.material.color;
-			TmpColor /= 3f * Time.deltaTime;
-			render.material.color = TmpColor;
-		}
-
-		Action.DoAction(gameObject);
-	}
+    private void Update()
+    {
+        if (!IsAlive)
+        {
+            TmpColor = render.material.color;
+            TmpColor /= 3f * Time.deltaTime;
+            render.material.color = TmpColor;
+        }
+        else
+        {
+            Action.DoAction(gameObject);
+        }
+    }
 
 	private void OnTriggerEnter(Collider other)
 	{
@@ -71,8 +74,6 @@ public class EnemyBase : MonoBehaviour
 		else
 			Remove(3);
 	}
-
-
 
 	public void Remove(float delay)
 	{
@@ -101,4 +102,32 @@ public class EnemyBase : MonoBehaviour
 	{
 		Remove(0.3f);
 	}
+
+    public void IsStunned(float duration = 5f)
+    {
+        StartCoroutine(IsStunnedEnumerator(duration));
+    }
+
+    IEnumerator IsStunnedEnumerator(float duration)
+    {
+        if (!isStunnedNow)
+        {
+            isStunnedNow = true;
+            Vector3 StartingSpeed = rigidbody.velocity;
+            rigidbody.velocity = Vector3.zero;
+
+            float time = duration;
+
+            while (time > 0)
+            {
+                time -= Time.deltaTime;
+                yield return new WaitForEndOfFrame();
+            }
+
+            rigidbody.velocity = StartingSpeed;
+            isStunnedNow = false;
+        }
+        
+
+    }
 }
