@@ -17,6 +17,11 @@ public class AttackPlayerLocal : PlayerLocalBehaviour
 			Ability1();
 		}
 
+		if (Input.GetKeyDown(KeyCode.RightShift))
+		{
+			Ability2();
+		}
+
 		if (Input.GetKey(KeyCode.D))
 		{
 			_playerDirection += Vector2.right;
@@ -41,9 +46,21 @@ public class AttackPlayerLocal : PlayerLocalBehaviour
 		{
 			Move(_playerDirection);
 		}
+
+		if (Input.GetKeyDown(KeyCode.J))
+		{
+			TakeDmg(10.0f);
+		}
 	}
 
-	public override void Ability1()
+	public override void TakeDmg (float val)
+	{
+		PlayerHealth -= val;
+
+		base.TakeDmg(val);
+	}
+
+	public override void Ability1 ()
 	{
 		int mask = 1 << LayerMask.NameToLayer("Enemy");
 		RaycastHit[] hits = Physics.BoxCastAll(transform.position, Vector3.one, Vector3.forward, Quaternion.identity, 3.0f, mask);

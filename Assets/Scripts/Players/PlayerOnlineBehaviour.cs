@@ -35,6 +35,14 @@ public class PlayerOnlineBehaviour : NetworkBehaviour, IPlayerBehaviour
 	}
 
 	/// <summary>
+	/// Implementation of <see cref="IPlayerBehaviour.TakeDmg(float)"/>.
+	/// </summary>
+	/// <param name="val">The amount of damage to take.</param>
+	public virtual void TakeDmg (float val)
+	{
+	}
+
+	/// <summary>
 	/// Implementation of <see cref="IPlayerBehaviour.Ability1()"/>.
 	/// </summary>
 	public void Ability1 ()

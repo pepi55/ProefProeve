@@ -2,48 +2,68 @@
 //26-2-2016
 
 using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
 public class EnemyManager : MonoBehaviour
 {
+	[SerializeField] private EnemyBase[] spawnableBosses;
 	[SerializeField] private Vector3 spawnMin;
 	[SerializeField] private Vector3 spawnMax;
-	
-    
-    [SerializeField, Tooltip("A List of the enemies that can be spawned")]private GameObject[] SpawnAbleEnemies;
+	[SerializeField] private float spawnRate;
+
+	[SerializeField, Tooltip("A List of the enemies that can be spawned")]
+        private GameObject[] spawnableEnemies; // was hard to read as one long line
 	[SerializeField, Tooltip("time in seconds")] private float SpawnDelay;
 
-    private List<EnemyBase> enemyPool;
+	private List<EnemyBase> enemyPool;
 
-    private float spawnTimer;
+	private float timeSinceGameStart;
+	private float spawnTimer;
+
+	private bool bossActive;
 
 	protected void Awake ()
 	{
-        enemyPool = new List<EnemyBase>();
-        if (SpawnAbleEnemies == null)
-            SpawnAbleEnemies = new GameObject[0];
+		enemyPool = new List<EnemyBase>();
+
+		bossActive = false;
+
+		if (spawnableEnemies == null)
+		{
+			spawnableEnemies = new GameObject[0];
+		}
 	}
 
-    protected void Update()
-    {
-        if (spawnTimer > SpawnDelay)
-        {
-            if (SpawnAbleEnemies.Length > 0)
-            {
-                SpawnEnemies();
-            }
-            else
-            {
-                TestSpawn();
-            }
+	protected void Update()
+	{
+		// Enemies respawn at an exponential decay rate (spawn faster depending on how
+		// long you have been playing).
+		if (spawnTimer > 0.5f + (5.0f * Mathf.Exp(-timeSinceGameStart / spawnRate)))
+		{
+			if (spawnableBosses.Length > 0)
+			{
+				if (timeSinceGameStart % 30 == 0)
+				{
+					SpawnBoss();
+				}
+			}
 
-            spawnTimer = 0;
-        }
+			if (spawnableEnemies.Length > 0 && !bossActive)
+			{
+				SpawnEnemies();
+			}
+			else if (!bossActive)
+			{
+				TestSpawn();
+			}
 
-        spawnTimer += Time.deltaTime;
-    }
+			spawnTimer = 0;
+		}
+
+		spawnTimer += Time.deltaTime;
+		timeSinceGameStart += Time.deltaTime;
+	}
 
 	private void TestSpawn()
 	{
@@ -69,27 +89,40 @@ public class EnemyManager : MonoBehaviour
 	private void SpawnEnemies()
 	{
 		EnemyBase enemy = GetEnemy();
-        enemy.Reset();
-        enemy.Rigidbody.velocity = new Vector3(0, 0, -2);
-        enemy.transform.localPosition = RandomPos();
+		enemy.Reset();
+		enemy.Rigidbody.velocity = new Vector3(0, 0, -2);
+		enemy.transform.localPosition = RandomPos();
+	}
+
+	private EnemyBase SpawnBoss()
+	{
+        EnemyBase SelectedEnemy;
+
+        GameObject newEnemy = Instantiate(spawnableEnemies[Random.Range(0, spawnableBosses.Length)]);
+        newEnemy.transform.SetParent(transform, false);
+        SelectedEnemy = newEnemy.GetComponent<EnemyBase>();
+        return SelectedEnemy;
 	}
 
 	private EnemyBase GetEnemy()
 	{
-        EnemyBase SelectedEnemy;
-        if (enemyPool.Count > 0 && enemyPool.Any(x => x.IsRemoved == true))
-        {
-            SelectedEnemy = enemyPool.First(x => x.IsRemoved == true);
-            if (SelectedEnemy)
-                return SelectedEnemy;
-        }
+		EnemyBase SelectedEnemy;
 
-        GameObject newEnemy = Instantiate(SpawnAbleEnemies[Random.Range(0, SpawnAbleEnemies.Length)]);
-        newEnemy.transform.SetParent(transform, false);
-        SelectedEnemy = newEnemy.GetComponent<EnemyBase>();
-        enemyPool.Add(SelectedEnemy);
+		if (enemyPool.Count > 0 && enemyPool.Any(x => x.IsRemoved == true))
+		{
+			SelectedEnemy = enemyPool.First(x => x.IsRemoved == true);
+			if (SelectedEnemy)
+			{
+				return SelectedEnemy;
+			}
+		}
 
-        return SelectedEnemy;
+		GameObject newEnemy = Instantiate(spawnableEnemies[Random.Range(0, spawnableEnemies.Length)]);
+		newEnemy.transform.SetParent(transform, false);
+		SelectedEnemy = newEnemy.GetComponent<EnemyBase>();
+		enemyPool.Add(SelectedEnemy);
+
+		return SelectedEnemy;
 	}
 
 	private Vector3 RandomPos()
@@ -108,25 +141,24 @@ public class EnemyManager : MonoBehaviour
 	}
 
 #if UNITY_EDITOR
-    public Vector3 SpawnMin
-    {
-        get { return spawnMin; }
-        set { spawnMin = value; }
-    }
+	public Vector3 SpawnMin
+	{
+		get { return spawnMin; }
+		set { spawnMin = value; }
+	}
 
-    public Vector3 SpawnMax
-    {
-        get { return spawnMax; }
-        set { spawnMax = value; }
-    }
+	public Vector3 SpawnMax
+	{
+		get { return spawnMax; }
+		set { spawnMax = value; }
+	}
 
-    private Vector3 tmpMax;
+	private Vector3 tmpMax;
 	private Vector3 tmpMin;
 
-    [SerializeField]
-    private Color lineColor;
+	[SerializeField] private Color lineColor;
 
-    public void OnDrawGizmosSelected()
+	public void OnDrawGizmosSelected()
 	{
 		tmpMax = transform.position + spawnMax;
 		tmpMin = transform.position + spawnMin;
