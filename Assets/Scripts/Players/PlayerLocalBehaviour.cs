@@ -37,6 +37,30 @@ public class PlayerLocalBehaviour : MonoBehaviour, IPlayerBehaviour
 	public virtual void Move (Vector2 dir)
 	{
 		gameObject.transform.Translate(dir * (Time.deltaTime * playerSpeed));
+
+		Vector3 newpos = transform.position;
+
+		if (transform.position.x > 8.5f)
+		{
+			newpos.x = 8.5f;
+		}
+
+		if (transform.position.x < -10)
+		{
+			newpos.x = -10;
+		}
+
+		if (transform.position.y > 4)
+		{
+			newpos.y = 4;
+		}
+
+		if (transform.position.y < -4)
+		{
+			newpos.y = -4;
+		}
+
+		transform.position = newpos;
 	}
 
 	/// <summary>
