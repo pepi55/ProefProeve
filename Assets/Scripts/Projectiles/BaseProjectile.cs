@@ -12,10 +12,8 @@ public class BaseProjectile : MonoBehaviour
 	public bool IsRemoved { get; private set; }
 	private bool removeActive;
 
-	[SerializeField]
-	new SphereCollider collider;
-	[SerializeField]
-	new public Rigidbody rigidbody { get; private set; }
+	[SerializeField] new SphereCollider collider;
+	[SerializeField] new public Rigidbody rigidbody { get; private set; }
 
 	void Awake()
 	{
@@ -38,6 +36,11 @@ public class BaseProjectile : MonoBehaviour
 
 	public void OnCollisionEnter(Collision collision)
 	{
+		if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
+		{
+			Destroy(collision.gameObject);
+		}
+
 		Remove(0.3f);
 	}
 
