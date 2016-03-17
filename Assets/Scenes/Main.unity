@@ -260,6 +260,52 @@ RectTransform:
   m_PrefabParentObject: {fileID: 22447370, guid: 010c2e024cdfbd34ab9d038e62c1c4be,
     type: 2}
   m_PrefabInternal: {fileID: 575749228}
+--- !u!1001 &1384333368
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1515914042}
+    m_Modifications:
+    - target: {fileID: 420080, guid: 985f53598f1f7274e85b1395a13d5aed, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -5.0792255
+      objectReference: {fileID: 0}
+    - target: {fileID: 420080, guid: 985f53598f1f7274e85b1395a13d5aed, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -3.3798265
+      objectReference: {fileID: 0}
+    - target: {fileID: 420080, guid: 985f53598f1f7274e85b1395a13d5aed, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -22.598875
+      objectReference: {fileID: 0}
+    - target: {fileID: 420080, guid: 985f53598f1f7274e85b1395a13d5aed, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0.110229224
+      objectReference: {fileID: 0}
+    - target: {fileID: 420080, guid: 985f53598f1f7274e85b1395a13d5aed, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 420080, guid: 985f53598f1f7274e85b1395a13d5aed, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 420080, guid: 985f53598f1f7274e85b1395a13d5aed, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 0.9939062
+      objectReference: {fileID: 0}
+    - target: {fileID: 420080, guid: 985f53598f1f7274e85b1395a13d5aed, type: 2}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 985f53598f1f7274e85b1395a13d5aed, type: 2}
+  m_IsPrefabParent: 0
+--- !u!4 &1384333369 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 420080, guid: 985f53598f1f7274e85b1395a13d5aed, type: 2}
+  m_PrefabInternal: {fileID: 1384333368}
 --- !u!1 &1515914041
 GameObject:
   m_ObjectHideFlags: 0
@@ -290,6 +336,7 @@ Transform:
   - {fileID: 2054742584}
   - {fileID: 2105184103}
   - {fileID: 404242796}
+  - {fileID: 1384333369}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &1934124184 stripped
