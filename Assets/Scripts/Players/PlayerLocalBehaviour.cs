@@ -10,6 +10,7 @@ using System.Collections.Generic;
 public class PlayerLocalBehaviour : MonoBehaviour, IPlayerBehaviour
 {
 	public static float PlayerHealth { get; protected set; }
+	public static float UltChargeMeter { get; protected set; }
 
 	protected static Dictionary<int, bool> _playerUltActivations;
 	protected Vector2 _playerDirection;
@@ -64,6 +65,11 @@ public class PlayerLocalBehaviour : MonoBehaviour, IPlayerBehaviour
 	/// </summary>
 	public virtual void Ability2 ()
 	{
+		if (UltChargeMeter < 10.0f)
+		{
+			return;
+		}
+
 		if (_playerUltActivations.Count > 0)
 		{
 			int id = gameObject.GetInstanceID();
@@ -80,7 +86,7 @@ public class PlayerLocalBehaviour : MonoBehaviour, IPlayerBehaviour
 			foreach (KeyValuePair<int, bool> ultActive in _playerUltActivations)
 			{
 				Debug.Log("Key: " + ultActive.Key + " Value: " + ultActive.Value);
-				/// FIXME: Not all values are reset back to false causing multiple ult activations.
+				// FIXME: Not all values are reset back to false causing multiple ult activations.
 				if (!ultActive.Value)
 				{
 					return;
@@ -90,7 +96,7 @@ public class PlayerLocalBehaviour : MonoBehaviour, IPlayerBehaviour
 			Debug.Log("Rip Jan");
 
 			_playerUltActivations[id] = false;
-			Debug.Log(_playerUltActivations[id]);
+			UltChargeMeter = 0.0f;
 		}
 	}
 }

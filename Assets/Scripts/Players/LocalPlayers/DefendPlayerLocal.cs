@@ -4,12 +4,24 @@
 using UnityEngine;
 using System.Collections;
 
+using Events;
+
 public class DefendPlayerLocal : PlayerLocalBehaviour, IPlayerBehaviour
 {
 	[SerializeField] private GameObject playerShield;
 
 	public float ShieldCooldown { get; private set; }
 	public float StunCooldown { get; private set; }
+
+	protected void OnEnable ()
+	{
+		GlobalEvents.AddEventListener<AbsorbedEvent>(OnAbsorbProjectile);
+	}
+
+	protected void OnDisable ()
+	{
+		GlobalEvents.RemoveEventListener<AbsorbedEvent>(OnAbsorbProjectile);
+	}
 
 	protected override void Start ()
 	{
@@ -26,6 +38,11 @@ public class DefendPlayerLocal : PlayerLocalBehaviour, IPlayerBehaviour
 		if (Input.GetKeyDown(KeyCode.RightControl))
 		{
 			Ability1();
+		}
+
+		if (Input.GetKeyDown(KeyCode.Slash))
+		{
+			Stun();
 		}
 
 		if (Input.GetKeyDown(KeyCode.LeftShift))
@@ -57,11 +74,6 @@ public class DefendPlayerLocal : PlayerLocalBehaviour, IPlayerBehaviour
 		{
 			Move(_playerDirection);
 		}
-
-		if (Input.GetKeyDown(KeyCode.H))
-		{
-			TakeDmg(10.0f);
-		}
 	}
 
 	public override void TakeDmg (float val)
@@ -85,6 +97,12 @@ public class DefendPlayerLocal : PlayerLocalBehaviour, IPlayerBehaviour
 		{
 			StartCoroutine(ActivateStun());
 		}
+	}
+
+	private void OnAbsorbProjectile (AbsorbedEvent evt)
+	{
+		UltChargeMeter++;
+		Debug.Log("Ult Charges: " + UltChargeMeter);
 	}
 
 	private IEnumerator ActivateShield ()

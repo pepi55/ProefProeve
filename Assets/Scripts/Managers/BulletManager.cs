@@ -8,69 +8,69 @@ using System.Collections.Generic;
 [RequireComponent (typeof(Rigidbody))]
 public class BulletManager : MonoBehaviour
 {
-    private static BulletManager instance;
+	private static BulletManager instance;
 
-    private List<BaseProjectile> PlayerProjectileList;
-    private List<BaseProjectile> EnemyProjectileList;
+	private List<BaseProjectile> PlayerProjectileList;
+	private List<BaseProjectile> EnemyProjectileList;
 
-   [SerializeField] private BaseProjectile PlayerProjectile = null;
-   [SerializeField] private BaseProjectile EnemyProjectile  = null;
-  
+	[SerializeField] private BaseProjectile PlayerProjectile = null;
+	[SerializeField] private BaseProjectile EnemyProjectile  = null;
 
-    void Awake()
-    {
-        instance = this;
 
-        PlayerProjectileList = new List<BaseProjectile>();
-        EnemyProjectileList = new List<BaseProjectile>();
-    }
+	void Awake()
+	{
+		instance = this;
 
-    private static void checkInstance()
-    {
-        if(!instance)
-        {
-            GameObject g = new GameObject("Bullet Manager");
-            BulletManager bm = g.AddComponent<BulletManager>();
-            instance = bm;
-        }
-    }
+		PlayerProjectileList = new List<BaseProjectile>();
+		EnemyProjectileList = new List<BaseProjectile>();
+	}
 
-    public static BaseProjectile GetPlayerBullet()
-    {
-        checkInstance();
+	private static void checkInstance()
+	{
+		if(!instance)
+		{
+			GameObject g = new GameObject("Bullet Manager");
+			BulletManager bm = g.AddComponent<BulletManager>();
+			instance = bm;
+		}
+	}
 
-        if(instance.PlayerProjectileList.Any(x => x.IsRemoved == true))
-        {
-           return instance.PlayerProjectileList.First(x => x.IsRemoved == true);
-        }
+	public static BaseProjectile GetPlayerBullet()
+	{
+		checkInstance();
 
-        GameObject NewBulletGameObject = Instantiate(instance.PlayerProjectile.gameObject);
-        NewBulletGameObject.transform.SetParent(instance.transform);
+		if(instance.PlayerProjectileList.Any(x => x.IsRemoved == true))
+		{
+			return instance.PlayerProjectileList.First(x => x.IsRemoved == true);
+		}
 
-        BaseProjectile NewBullet = NewBulletGameObject.GetComponent<BaseProjectile>();
+		GameObject NewBulletGameObject = Instantiate(instance.PlayerProjectile.gameObject);
+		NewBulletGameObject.transform.SetParent(instance.transform);
 
-        instance.PlayerProjectileList.Add(NewBullet);
+		BaseProjectile NewBullet = NewBulletGameObject.GetComponent<BaseProjectile>();
 
-        return NewBullet;
-        
-    }
+		instance.PlayerProjectileList.Add(NewBullet);
 
-    public static BaseProjectile GetEnemyBullet()
-    {
-        checkInstance();
+		return NewBullet;
 
-        if (instance.EnemyProjectileList.Any(x => x.IsRemoved == true))
-        {
-            return instance.EnemyProjectileList.First(x => x.IsRemoved == true);
-        }
+	}
 
-        GameObject NewBulletGameObject = Instantiate(instance.EnemyProjectile.gameObject);
-        NewBulletGameObject.transform.SetParent(instance.transform);
+	public static BaseProjectile GetEnemyBullet()
+	{
+		checkInstance();
 
-        BaseProjectile NewBullet = NewBulletGameObject.GetComponent<BaseProjectile>();
+		if (instance.EnemyProjectileList.Any(x => x.IsRemoved == true))
+		{
+			return instance.EnemyProjectileList.First(x => x.IsRemoved == true);
+		}
 
-        instance.EnemyProjectileList.Add(NewBullet);
+		GameObject NewBulletGameObject = Instantiate(instance.EnemyProjectile.gameObject);
+		NewBulletGameObject.transform.SetParent(instance.transform);
 
-        return NewBullet;
-    }
+		BaseProjectile NewBullet = NewBulletGameObject.GetComponent<BaseProjectile>();
+
+		instance.EnemyProjectileList.Add(NewBullet);
+
+		return NewBullet;
+	}
 }
