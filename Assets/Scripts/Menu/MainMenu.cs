@@ -9,6 +9,15 @@ public class MainMenu : MonoBehaviour
     [SerializeField]
     OptionsMenu options;
 
+    [SerializeField]
+    GameObject Main, Help;
+
+    void Start()
+    {
+        Main.SetActive(true);
+        Help.SetActive(false);
+    }
+
     public void Options(bool open)
     {
         options.OpenMenu();
@@ -22,6 +31,31 @@ public class MainMenu : MonoBehaviour
     public void StartGame()
     {
         SceneControler.Load("LocalGame");
+    }
+
+    public void OpenHelp()
+    {
+        Main.SetActive(false);
+        Help.SetActive(true);
+    }
+
+    public void CloseHelp()
+    {
+        Main.SetActive(true);
+        Help.SetActive(false);
+    }
+
+    void OpenMain()
+    {
+        options.CloseMenu();
+        Main.SetActive(true);
+        Help.SetActive(false);
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+            OpenMain();
     }
 
     //int frame;
