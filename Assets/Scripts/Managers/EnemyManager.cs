@@ -25,6 +25,8 @@ public class EnemyManager : MonoBehaviour
 
 	protected void Awake ()
 	{
+        Game_UIControler.onPause += Game_UIControler_onPause;
+
 		enemyPool = new List<EnemyBase>();
 
 		bossActive = false;
@@ -35,7 +37,12 @@ public class EnemyManager : MonoBehaviour
 		}
 	}
 
-	protected void Update()
+    private void Game_UIControler_onPause(bool b)
+    {
+        enabled = !b;
+    }
+
+    protected void Update()
 	{
 		// Enemies respawn at an exponential decay rate (spawn faster depending on how
 		// long you have been playing).

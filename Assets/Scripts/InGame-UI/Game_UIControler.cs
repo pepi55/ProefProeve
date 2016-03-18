@@ -13,12 +13,13 @@ public class Game_UIControler : MonoBehaviour {
 	[SerializeField]
 	StatusBar SuperAttackChargeBar;
 
-    GameObject PauseMenu, InGAmeUI;
+    [SerializeField]
+    GameObject PauseMenu, InGameUI;
 
 	private float Player;
 	private void Start()
 	{
-
+        PauseMenu.SetActive(false);
 	}
 
 	private void Update()
@@ -28,13 +29,13 @@ public class Game_UIControler : MonoBehaviour {
         
 	}
 
-    public void ShowPause()
+    public void Pause()
     {
         if (onPause != null)
             onPause(true);
 
         PauseMenu.SetActive(true);
-        InGAmeUI.SetActive(false);
+        InGameUI.SetActive(false);
     }
 
     public void Continue()
@@ -43,7 +44,7 @@ public class Game_UIControler : MonoBehaviour {
             onPause(false);
 
         PauseMenu.SetActive(false);
-        InGAmeUI.SetActive(true);
+        InGameUI.SetActive(true);
     }
 
     public void ExitToMain()
