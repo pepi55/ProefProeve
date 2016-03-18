@@ -9,6 +9,8 @@ using System.Collections.Generic;
 /// </summary>
 public class PlayerLocalBehaviour : MonoBehaviour, IPlayerBehaviour
 {
+	[SerializeField] protected Animator _playerAnimator;
+
 	public static float PlayerHealth { get; protected set; }
 	public static float UltChargeMeter { get; protected set; }
 
@@ -67,8 +69,10 @@ public class PlayerLocalBehaviour : MonoBehaviour, IPlayerBehaviour
 	/// Implementation of <see cref="IPlayerBehaviour.TakeDmg(float)"/>.
 	/// </summary>
 	/// <param name="val">The amount of damage to take.</param>
-	public static virtual void TakeDmg (float val)
+	public virtual void TakeDmg (float val)
 	{
+		_playerAnimator.SetTrigger("Hit");
+
 		if (PlayerHealth <= 0.0f)
 		{
 			Destroy(gameObject);

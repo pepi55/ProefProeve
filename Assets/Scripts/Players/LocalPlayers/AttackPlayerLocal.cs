@@ -46,11 +46,6 @@ public class AttackPlayerLocal : PlayerLocalBehaviour
 		{
 			Move(_playerDirection);
 		}
-
-		if (Input.GetKeyDown(KeyCode.J))
-		{
-			TakeDmg(10.0f);
-		}
 	}
 
 	public override void TakeDmg (float val)
@@ -64,6 +59,8 @@ public class AttackPlayerLocal : PlayerLocalBehaviour
 	{
 		int mask = 1 << LayerMask.NameToLayer("Enemy");
 		RaycastHit[] hits = Physics.BoxCastAll(transform.position, Vector3.one, Vector3.forward, Quaternion.identity, 3.0f, mask);
+
+		_playerAnimator.SetTrigger("Sword-Slash");
 
 		if (hits.Length > 0)
 		{

@@ -109,10 +109,12 @@ public class DefendPlayerLocal : PlayerLocalBehaviour, IPlayerBehaviour
 	{
 		ShieldCooldown = 1.5f;
 		playerShield.SetActive(true);
+		_playerAnimator.SetTrigger("Shield-Spawn");
 
 		yield return new WaitForSeconds(1.0f);
 
 		playerShield.SetActive(false);
+		_playerAnimator.SetTrigger("Idle");
 
 		while (ShieldCooldown >= 0.0f)
 		{
