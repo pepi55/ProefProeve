@@ -4,54 +4,54 @@
 using UnityEngine;
 using System.Collections;
 
-[RequireComponent(typeof(Rigidbody),typeof(BoxCollider))]
+[RequireComponent(typeof(Rigidbody), typeof(BoxCollider))]
 public class EnemyBase : MonoBehaviour
 {
-	private Renderer render;
-	public Renderer Render
-	{
-		get
-		{
-			if (render == null)
-				render = GetComponent<Renderer>();
-			return render;
-		}
-	}
+    private Renderer render;
+    public Renderer Render
+    {
+        get
+        {
+            if (render == null)
+                render = GetComponent<Renderer>();
+            return render;
+        }
+    }
 
-	new private Rigidbody rigidbody;
-	public Rigidbody Rigidbody { get { return rigidbody; } }
-	private Color TmpColor;
-	bool removeActive;
+    new private Rigidbody rigidbody;
+    public Rigidbody Rigidbody { get { return rigidbody; } }
+    private Color TmpColor;
+    bool removeActive;
     bool isStunnedNow = false;
 
-	public bool IsAlive { get; private set; }
-	public bool IsRemoved { get; private set; }
+    public bool IsAlive { get; private set; }
+    public bool IsRemoved { get; private set; }
 
-	//This needs a better name
-	IEnemyBaseInterface Action;
+    //This needs a better name
+    IEnemyBaseInterface Action;
 
-	private void Awake()
-	{
-		render = GetComponent<Renderer>();
-		render.material.color = Color.white;
+    private void Awake()
+    {
+        render = GetComponent<Renderer>();
+        render.material.color = Color.white;
 
-		rigidbody = GetComponent<Rigidbody>();
-		rigidbody.useGravity = false;
+        rigidbody = GetComponent<Rigidbody>();
+        rigidbody.useGravity = false;
 
-		IsAlive = true;
+        IsAlive = true;
 
-		Action = new EnemyBasicShoot();
-	}	
+        Action = new EnemyBasicShoot();
+    }
 
-	public void Reset()
-	{
-		IsAlive = true;
-		IsRemoved = false;
-		Render.material.color = Color.white;
-		gameObject.SetActive(true);
-		GetComponent<BoxCollider>().enabled = true;
-		Action = new EnemyBasicShoot();
-	}
+    public void Reset()
+    {
+        IsAlive = true;
+        IsRemoved = false;
+        //Render.material.color = Color.white;
+        gameObject.SetActive(true);
+        GetComponent<BoxCollider>().enabled = true;
+        Action = new EnemyBasicShoot();
+    }
 
     private void Update()
     {
@@ -67,41 +67,49 @@ public class EnemyBase : MonoBehaviour
         }
     }
 
-	private void OnTriggerEnter(Collider other)
-	{
-		if (other.gameObject.layer == LayerMask.NameToLayer("Analilation Plane"))
-			Remove(0);
-		else
-			Remove(3);
-	}
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Analilation Plane"))
+            Remove(0);
+        else if (other.gameObject.layer == LayerMask.NameToLayer("Player");
+            Remove(3);
+    }
 
-	public void Remove(float delay)
-	{
-		StartCoroutine(RemoveDelay(delay));
-	}
+    public void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Analilation Plane"))
+            Remove(0);
+        else
+            Remove(3);
+    }
 
-	IEnumerator RemoveDelay(float delay)
-	{
-		if (!removeActive)
-		{
-			IsAlive = false;
+    public void Remove(float delay)
+    {
+        StartCoroutine(RemoveDelay(delay));
+    }
 
-			rigidbody.velocity = Vector3.zero;
-			render.material.color = Color.blue;
-			GetComponent<BoxCollider>().enabled = false;
+    IEnumerator RemoveDelay(float delay)
+    {
+        if (!removeActive)
+        {
+            IsAlive = false;
 
-			removeActive = true;
-			yield return new WaitForSeconds(delay);
-			removeActive = false;
-			IsRemoved = true;
-			gameObject.SetActive(false);
-		}
-	}
+            rigidbody.velocity = Vector3.zero;
+            //render.material.color = Color.blue;
+            GetComponent<BoxCollider>().enabled = false;
 
-	public void isHit()
-	{
-		Remove(0.3f);
-	}
+            removeActive = true;
+            yield return new WaitForSeconds(delay);
+            removeActive = false;
+            IsRemoved = true;
+            gameObject.SetActive(false);
+        }
+    }
+
+    public void isHit()
+    {
+        Remove(0.3f);
+    }
 
     public void IsStunned(float duration = 5f)
     {
@@ -127,7 +135,7 @@ public class EnemyBase : MonoBehaviour
             rigidbody.velocity = StartingSpeed;
             isStunnedNow = false;
         }
-        
+
 
     }
 }
