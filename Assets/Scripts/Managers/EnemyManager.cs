@@ -90,7 +90,7 @@ public class EnemyManager : MonoBehaviour
 	{
 		EnemyBase enemy = GetEnemy();
 		enemy.Reset();
-		enemy.Rigidbody.velocity = new Vector3(0, 0, -2);
+		enemy.Rigidbody.velocity = new Vector3(0, 0, -5);
 		enemy.transform.localPosition = RandomPos();
 	}
 

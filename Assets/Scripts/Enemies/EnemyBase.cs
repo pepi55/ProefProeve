@@ -7,145 +7,141 @@ using System.Collections;
 [RequireComponent(typeof(Rigidbody), typeof(BoxCollider))]
 public class EnemyBase : MonoBehaviour
 {
-	//private Renderer render;
-	//public Renderer Render
-	//{
-	//    get
-	//    {
-	//        if (render == null)
-	//            render = GetComponent<Renderer>();
-	//        return render;
-	//    }
-	//}
+    System.DateTime StartLive;
 
-	new private Rigidbody rigidbody;
-	public Rigidbody Rigidbody { get { return rigidbody; } }
-	private Color TmpColor;
-	bool removeActive;
-	bool isStunnedNow = false;
+    //private Renderer render;
+    //public Renderer Render
+    //{
+    //    get
+    //    {
+    //        if (render == null)
+    //            render = GetComponent<Renderer>();
+    //        return render;
+    //    }
+    //}
 
-	public bool IsAlive { get; private set; }
-	public bool IsRemoved { get; private set; }
+    new private Rigidbody rigidbody;
+    public Rigidbody Rigidbody { get { return rigidbody; } }
+    private Color TmpColor;
+    bool removeActive;
+    bool isStunnedNow = false;
 
-	//This needs a better name
-	IEnemyBaseInterface Action;
+    public bool IsAlive { get; private set; }
+    public bool IsRemoved { get; private set; }
 
-	private void Awake()
-	{
-		//render = GetComponent<Renderer>();
-		//render.material.color = Color.white;
+    //This needs a better name
+    IEnemyBaseInterface Action;
 
-		rigidbody = GetComponent<Rigidbody>();
-		rigidbody.useGravity = false;
+    private void Awake()
+    {
+        //render = GetComponent<Renderer>();
+        //render.material.color = Color.white;
 
-		IsAlive = true;
+        rigidbody = GetComponent<Rigidbody>();
+        rigidbody.useGravity = false;
 
-		Action = new EnemyBasicShoot();
-	}
+        IsAlive = true;
 
-	public void Reset()
-	{
-		IsAlive = true;
-		IsRemoved = false;
-		//Render.material.color = Color.white;
-		gameObject.SetActive(true);
-		GetComponent<BoxCollider>().enabled = true;
-		Action = new EnemyBasicShoot();
-	}
+        Action = new EnemyBasicShoot();
+    }
 
-	private void Update()
-	{
-		if (!IsAlive)
-		{
-			//TmpColor = render.material.color;
-			//TmpColor /= 3f * Time.deltaTime;
-			//render.material.color = TmpColor;
-		}
-		else
-		{
-			Action.DoAction(gameObject);
-		}
-	}
+    public void Reset()
+    {
+        IsAlive = true;
+        IsRemoved = false;
+        //Render.material.color = Color.white;
+        gameObject.SetActive(true);
+        GetComponent<BoxCollider>().enabled = true;
+        Action = new EnemyBasicShoot();
+        StartLive = System.DateTime.Now;
+    }
 
-	private void OnTriggerEnter(Collider other)
-	{
-		if (other.gameObject.layer == LayerMask.NameToLayer("Analilation Plane"))
-		{
-			Remove(0);
-		}
-		else if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
-		{
-			Remove(3);
-		}
-		else if (other.tag == "EnemySlow")
-		{
-			rigidbody.velocity /= 10f;
-		}
-	}
+    private void Update()
+    {
+        if (!IsAlive)
+        {
+            //TmpColor = render.material.color;
+            //TmpColor /= 3f * Time.deltaTime;
+            //render.material.color = TmpColor;
+        }
+        else
+        {
+            Action.DoAction(gameObject);
+        }
+    }
 
-	public void OnCollisionEnter(Collision collision)
-	{
-		if (collision.gameObject.layer == LayerMask.NameToLayer("Analilation Plane"))
-		{
-			Remove(0);
-		}
-		else
-		{
-			Remove(3);
-		}
-	}
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Analilation Plane"))
+            Remove(0);
+        else if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
+            Remove(3);
+        else if (other.tag == "EnemySlow")
+            rigidbody.velocity /= 10f;
+    }
 
-	public void Remove(float delay)
-	{
-		StartCoroutine(RemoveDelay(delay));
-	}
+    public void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Analilation Plane"))
+            Remove(0);
+        else
+            Remove(3);
+    }
 
-	IEnumerator RemoveDelay(float delay)
-	{
-		if (!removeActive)
-		{
-			IsAlive = false;
+    public void Remove(float delay)
+    {
+        Debug.Log((System.DateTime.Now - StartLive).TotalSeconds);
+        StartCoroutine(RemoveDelay(delay));
+    }
 
-			rigidbody.velocity = Vector3.zero;
-			//render.material.color = Color.blue;
-			GetComponent<BoxCollider>().enabled = false;
+    IEnumerator RemoveDelay(float delay)
+    {
+        if (!removeActive)
+        {
+            IsAlive = false;
 
-			removeActive = true;
-			yield return new WaitForSeconds(delay);
-			removeActive = false;
-			IsRemoved = true;
-			gameObject.SetActive(false);
-		}
-	}
+            rigidbody.velocity = Vector3.zero;
+            //render.material.color = Color.blue;
+            GetComponent<BoxCollider>().enabled = false;
 
-	public void isHit()
-	{
-		Remove(0.3f);
-	}
+            removeActive = true;
+            yield return new WaitForSeconds(delay);
+            removeActive = false;
+            IsRemoved = true;
+            gameObject.SetActive(false);
+        }
+    }
 
-	public void IsStunned(float duration = 5f)
-	{
-		StartCoroutine(IsStunnedEnumerator(duration));
-	}
+    public void isHit()
+    {
+        Remove(0.3f);
+    }
 
-	IEnumerator IsStunnedEnumerator(float duration)
-	{
-		if (!isStunnedNow)
-		{
-			isStunnedNow = true;
-			Vector3 StartingSpeed = rigidbody.velocity;
-			rigidbody.velocity = Vector3.zero;
+    public void IsStunned(float duration = 5f)
+    {
+        StartCoroutine(IsStunnedEnumerator(duration));
+    }
 
-			float time = duration;
+    IEnumerator IsStunnedEnumerator(float duration)
+    {
+        if (!isStunnedNow)
+        {
+            isStunnedNow = true;
+            Vector3 StartingSpeed = rigidbody.velocity;
+            rigidbody.velocity = Vector3.zero;
 
-			while (time > 0)
-			{
-				time -= Time.deltaTime;
-				yield return new WaitForEndOfFrame();
-			}
+            float time = duration;
 
-			rigidbody.velocity = StartingSpeed;
-			isStunnedNow = false;
-		}
-	}
+            while (time > 0)
+            {
+                time -= Time.deltaTime;
+                yield return new WaitForEndOfFrame();
+            }
+
+            rigidbody.velocity = StartingSpeed;
+            isStunnedNow = false;
+        }
+
+
+    }
 }
