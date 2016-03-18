@@ -32,6 +32,8 @@ public class EnemyBase : MonoBehaviour
     //This needs a better name
     IEnemyBaseInterface Action;
 
+    Vector3 orignalSpeed;
+
     private void Awake()
     {
         //render = GetComponent<Renderer>();
@@ -43,6 +45,8 @@ public class EnemyBase : MonoBehaviour
         IsAlive = true;
 
         Action = new EnemyBasicShoot();
+
+        Game_UIControler.onPause += onPause;
     }
 
     public void Reset()
@@ -151,7 +155,21 @@ public class EnemyBase : MonoBehaviour
             rigidbody.velocity = StartingSpeed;
             isStunnedNow = false;
         }
+    }
 
+    public void onPause(bool b)
+    {
+        if (b)
+        {
+            orignalSpeed = rigidbody.velocity;
+            rigidbody.velocity = Vector3.zero;
 
+            enabled = false;
+        }
+        else
+        {
+            rigidbody.velocity = orignalSpeed;
+            enabled = true;
+        }
     }
 }

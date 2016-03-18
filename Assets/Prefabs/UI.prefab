@@ -37,7 +37,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &122606
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
@@ -46,6 +46,21 @@ GameObject:
   - 114: {fileID: 11432952}
   m_Layer: 5
   m_Name: BossHealth
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &125760
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 224: {fileID: 22422436}
+  m_Layer: 5
+  m_Name: InGame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -88,7 +103,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &134446
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
@@ -122,7 +137,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &141838
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
@@ -226,7 +241,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &179192
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
@@ -866,11 +881,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 22478834}
-  m_Father: {fileID: 22447370}
+  m_Father: {fileID: 22422436}
   m_RootOrder: 2
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 163.33002, y: -51.100098}
+  m_AnchoredPosition: {x: -746.6701, y: 439.01553}
   m_SizeDelta: {x: 286.66666, y: 76.296295}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &22420698
@@ -891,6 +906,27 @@ RectTransform:
   m_AnchoredPosition: {x: -0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
+--- !u!224 &22422436
+RectTransform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 125760}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 22456626}
+  - {fileID: 22445470}
+  - {fileID: 22400962}
+  - {fileID: 22487054}
+  m_Father: {fileID: 22447370}
+  m_RootOrder: 1
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &22426312
 RectTransform:
   m_ObjectHideFlags: 1
@@ -972,11 +1008,11 @@ RectTransform:
   m_Children:
   - {fileID: 22426312}
   - {fileID: 22473418}
-  m_Father: {fileID: 22447370}
+  m_Father: {fileID: 22422436}
   m_RootOrder: 1
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 20, y: -50}
+  m_AnchoredPosition: {x: -890.00006, y: 440.11563}
   m_SizeDelta: {x: 300, y: 20}
   m_Pivot: {x: 0, y: 1}
 --- !u!224 &22447370
@@ -989,11 +1025,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
-  - {fileID: 22456626}
-  - {fileID: 22445470}
-  - {fileID: 22400962}
-  - {fileID: 22487054}
   - {fileID: 22479580}
+  - {fileID: 22422436}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 0}
@@ -1013,11 +1046,11 @@ RectTransform:
   m_Children:
   - {fileID: 22420698}
   - {fileID: 22428424}
-  m_Father: {fileID: 22447370}
+  m_Father: {fileID: 22422436}
   m_RootOrder: 0
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -490.11557}
   m_SizeDelta: {x: 609, y: 53}
   m_Pivot: {x: 0.5, y: -0.7}
 --- !u!224 &22473418
@@ -1101,7 +1134,7 @@ RectTransform:
   m_Children:
   - {fileID: 22474008}
   m_Father: {fileID: 22447370}
-  m_RootOrder: 4
+  m_RootOrder: 0
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -0.000030518, y: -0.000015258789}
@@ -1119,11 +1152,11 @@ RectTransform:
   m_Children:
   - {fileID: 22430720}
   - {fileID: 22493624}
-  m_Father: {fileID: 22447370}
+  m_Father: {fileID: 22422436}
   m_RootOrder: 3
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0.000015259, y: -62.748}
+  m_AnchoredPosition: {x: 0.000015259, y: 427.36755}
   m_SizeDelta: {x: 910, y: 53}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &22493624

@@ -5,11 +5,15 @@ using UnityEngine;
 using System.Collections;
 
 public class Game_UIControler : MonoBehaviour {
+    public static event BoolDelegate onPause;
+
 
 	[SerializeField]
 	StatusBar PlayerHealth;
 	[SerializeField]
 	StatusBar SuperAttackChargeBar;
+
+    GameObject PauseMenu, InGAmeUI;
 
 	private float Player;
 	private void Start()
@@ -20,6 +24,25 @@ public class Game_UIControler : MonoBehaviour {
 	private void Update()
 	{
         PlayerHealth.Value = PlayerLocalBehaviour.PlayerHealth / 100f;
-		SuperAttackChargeBar.Value = Mathf.PingPong(Time.time - 0.5f, 1f);
+        SuperAttackChargeBar.Value = PlayerLocalBehaviour.UltChargeMeter / 10f;
+        
 	}
+
+    public void ShowPause()
+    {
+        if (onPause != null)
+            onPause(true);
+
+        PauseMenu.SetActive(true);
+        InGAmeUI.SetActive(false);
+    }
+
+    public void Continue()
+    {
+        if (onPause != null)
+            onPause(false);
+
+        PauseMenu.SetActive(false);
+        InGAmeUI.SetActive(true);
+    }
 }

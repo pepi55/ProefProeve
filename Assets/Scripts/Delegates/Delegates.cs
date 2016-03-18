@@ -4,3 +4,5 @@ using UnityEngine;
 using System.Collections;
 
 public delegate void VoidDelegate();
+
+public delegate void BoolDelegate(bool b);

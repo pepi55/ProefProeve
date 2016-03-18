@@ -15,6 +15,8 @@ public class BaseProjectile : MonoBehaviour
 	[SerializeField] new SphereCollider collider;
 	[SerializeField] new public Rigidbody rigidbody { get; private set; }
 
+    Vector3 orignalSpeed;
+
 	void Awake()
 	{
 
@@ -24,6 +26,8 @@ public class BaseProjectile : MonoBehaviour
 		rigidbody.useGravity = false;
 
 		Reset();
+
+        Game_UIControler.onPause += onPause;
 	}
 
 	public void Reset()
@@ -77,4 +81,17 @@ public class BaseProjectile : MonoBehaviour
 			gameObject.SetActive(false);
 		}
 	}
+
+    public void onPause(bool b)
+    {
+        if (b)
+        {
+            orignalSpeed = rigidbody.velocity;
+            rigidbody.velocity = Vector3.zero;
+        }
+        else
+        {
+            rigidbody.velocity = orignalSpeed;
+        }
+    }
 }
