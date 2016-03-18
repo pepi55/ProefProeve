@@ -7,16 +7,16 @@ using System.Collections;
 [RequireComponent(typeof(Rigidbody), typeof(BoxCollider))]
 public class EnemyBase : MonoBehaviour
 {
-    private Renderer render;
-    public Renderer Render
-    {
-        get
-        {
-            if (render == null)
-                render = GetComponent<Renderer>();
-            return render;
-        }
-    }
+    //private Renderer render;
+    //public Renderer Render
+    //{
+    //    get
+    //    {
+    //        if (render == null)
+    //            render = GetComponent<Renderer>();
+    //        return render;
+    //    }
+    //}
 
     new private Rigidbody rigidbody;
     public Rigidbody Rigidbody { get { return rigidbody; } }
@@ -32,8 +32,8 @@ public class EnemyBase : MonoBehaviour
 
     private void Awake()
     {
-        render = GetComponent<Renderer>();
-        render.material.color = Color.white;
+        //render = GetComponent<Renderer>();
+        //render.material.color = Color.white;
 
         rigidbody = GetComponent<Rigidbody>();
         rigidbody.useGravity = false;
@@ -57,9 +57,9 @@ public class EnemyBase : MonoBehaviour
     {
         if (!IsAlive)
         {
-            TmpColor = render.material.color;
-            TmpColor /= 3f * Time.deltaTime;
-            render.material.color = TmpColor;
+            //TmpColor = render.material.color;
+            //TmpColor /= 3f * Time.deltaTime;
+            //render.material.color = TmpColor;
         }
         else
         {
@@ -71,8 +71,10 @@ public class EnemyBase : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Analilation Plane"))
             Remove(0);
-        else if (other.gameObject.layer == LayerMask.NameToLayer("Player");
+        else if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
             Remove(3);
+        else if (other.tag == "EnemySlow")
+            rigidbody.velocity /= 10f;
     }
 
     public void OnCollisionEnter(Collision collision)
