@@ -67,7 +67,7 @@ public class PlayerLocalBehaviour : MonoBehaviour, IPlayerBehaviour
 	/// Implementation of <see cref="IPlayerBehaviour.TakeDmg(float)"/>.
 	/// </summary>
 	/// <param name="val">The amount of damage to take.</param>
-	public virtual void TakeDmg (float val)
+	public static virtual void TakeDmg (float val)
 	{
 		if (PlayerHealth <= 0.0f)
 		{
