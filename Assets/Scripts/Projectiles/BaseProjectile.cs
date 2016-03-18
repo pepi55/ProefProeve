@@ -38,7 +38,7 @@ public class BaseProjectile : MonoBehaviour
 	{
 		if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
 		{
-			Destroy(collision.gameObject);
+            collision.collider.SendMessage("TakeDmg");
 		}
 
 		Remove(0.3f);

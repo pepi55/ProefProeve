@@ -19,7 +19,7 @@ public class Game_UIControler : MonoBehaviour {
 
 	private void Update()
 	{
-		PlayerHealth.Value = PlayerStats.PlayerHealth/100f;
+        PlayerHealth.Value = PlayerLocalBehaviour.PlayerHealth / 100f;
 		SuperAttackChargeBar.Value = Mathf.PingPong(Time.time - 0.5f, 1f);
 	}
 }
