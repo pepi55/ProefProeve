@@ -13,7 +13,7 @@ public class EnemyManager : MonoBehaviour
 	[SerializeField] private float spawnRate;
 
 	[SerializeField, Tooltip("A List of the enemies that can be spawned")]
-        private GameObject[] spawnableEnemies; // was hard to read as one long line
+	private GameObject[] spawnableEnemies; // was hard to read as one long line
 	[SerializeField, Tooltip("time in seconds")] private float SpawnDelay;
 
 	private List<EnemyBase> enemyPool;
@@ -39,7 +39,7 @@ public class EnemyManager : MonoBehaviour
 	{
 		// Enemies respawn at an exponential decay rate (spawn faster depending on how
 		// long you have been playing).
-		if (spawnTimer > 0.5f + (5.0f * Mathf.Exp(-timeSinceGameStart / spawnRate)))
+		if (spawnTimer > 1.5f + (5.0f * Mathf.Exp(-timeSinceGameStart / spawnRate)))
 		{
 			if (spawnableBosses.Length > 0)
 			{
@@ -96,12 +96,12 @@ public class EnemyManager : MonoBehaviour
 
 	private EnemyBase SpawnBoss()
 	{
-        EnemyBase SelectedEnemy;
+		EnemyBase SelectedEnemy;
 
-        GameObject newEnemy = Instantiate(spawnableEnemies[Random.Range(0, spawnableBosses.Length)]);
-        newEnemy.transform.SetParent(transform, false);
-        SelectedEnemy = newEnemy.GetComponent<EnemyBase>();
-        return SelectedEnemy;
+		GameObject newEnemy = Instantiate(spawnableEnemies[Random.Range(0, spawnableBosses.Length)]);
+		newEnemy.transform.SetParent(transform, false);
+		SelectedEnemy = newEnemy.GetComponent<EnemyBase>();
+		return SelectedEnemy;
 	}
 
 	private EnemyBase GetEnemy()
