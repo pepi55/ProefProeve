@@ -73,19 +73,29 @@ public class EnemyBase : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Analilation Plane"))
+        {
             Remove(0);
+        }
         else if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
+        {
             Remove(3);
+        }
         else if (other.tag == "EnemySlow")
+        {
             rigidbody.velocity /= 10f;
+        }
     }
 
     public void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Analilation Plane"))
+        {
             Remove(0);
+        }
         else
+        {
             Remove(3);
+        }
     }
 
     public void Remove(float delay)
