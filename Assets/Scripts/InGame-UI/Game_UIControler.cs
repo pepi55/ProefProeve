@@ -45,4 +45,9 @@ public class Game_UIControler : MonoBehaviour {
         PauseMenu.SetActive(false);
         InGAmeUI.SetActive(true);
     }
+
+    public void ExitToMain()
+    {
+        SceneControler.Load("MainMenu");
+    }
 }
