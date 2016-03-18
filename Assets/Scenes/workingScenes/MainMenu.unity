@@ -257,7 +257,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
 --- !u!1 &1163847114
 GameObject:
   m_ObjectHideFlags: 0
@@ -342,7 +342,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1256859213}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!114 &1163847120
@@ -356,12 +357,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 445c571b423df094ab72e93cbfdff85e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1001 &1256859212
+--- !u!224 &1256859213 stripped
+RectTransform:
+  m_PrefabParentObject: {fileID: 22495304, guid: a3e66d48cd3ccb34daadb0181841ffce,
+    type: 2}
+  m_PrefabInternal: {fileID: 1971273848}
+--- !u!1001 &1971273848
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 1163847119}
     m_Modifications:
     - target: {fileID: 22495304, guid: a3e66d48cd3ccb34daadb0181841ffce, type: 2}
       propertyPath: m_LocalPosition.x
@@ -393,7 +399,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22495304, guid: a3e66d48cd3ccb34daadb0181841ffce, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22495304, guid: a3e66d48cd3ccb34daadb0181841ffce, type: 2}
       propertyPath: m_AnchoredPosition.x
@@ -443,10 +449,24 @@ Prefab:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1163847115}
-    - target: {fileID: 125376, guid: a3e66d48cd3ccb34daadb0181841ffce, type: 2}
-      propertyPath: m_IsActive
-      value: 1
+    - target: {fileID: 11440478, guid: a3e66d48cd3ccb34daadb0181841ffce, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1971273849}
+    - target: {fileID: 11440478, guid: a3e66d48cd3ccb34daadb0181841ffce, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OpenHelp
+      objectReference: {fileID: 0}
+    - target: {fileID: 11440478, guid: a3e66d48cd3ccb34daadb0181841ffce, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a3e66d48cd3ccb34daadb0181841ffce, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &1971273849 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11429808, guid: a3e66d48cd3ccb34daadb0181841ffce,
+    type: 2}
+  m_PrefabInternal: {fileID: 1971273848}
+  m_Script: {fileID: 11500000, guid: cbabf1f9de93b3b4fb46c90d271eb393, type: 3}

@@ -35,6 +35,8 @@ public class BackgroundGrid : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        Game_UIControler.onPause += Game_UIControler_onPause;
+
         transform.position = Vector3.zero;
 
         LinesOnX = new List<Line>();
@@ -82,6 +84,11 @@ public class BackgroundGrid : MonoBehaviour
 
             LinesOnZ.Add(lin);
         }
+    }
+
+    private void Game_UIControler_onPause(bool b)
+    {
+        enabled = !b;
     }
 
     // Update is called once per frame

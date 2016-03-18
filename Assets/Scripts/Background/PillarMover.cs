@@ -23,6 +23,8 @@ public class PillarMover : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        Game_UIControler.onPause += Game_UIControler_onPause;
+
         pillars = new List<Transform>();
 
         Transform t;
@@ -32,6 +34,11 @@ public class PillarMover : MonoBehaviour
                 t = CreatePillar(gam.transform);
                 t.localPosition = new Vector3(0, 0, (DistanceBetweenPillars * ((i + 1) + ReturnZDepth)));
             }
+    }
+
+    private void Game_UIControler_onPause(bool b)
+    {
+        enabled = !b;
     }
 
     // Update is called once per frame
