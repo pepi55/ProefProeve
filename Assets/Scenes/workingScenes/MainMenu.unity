@@ -441,32 +441,22 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 11429808, guid: a3e66d48cd3ccb34daadb0181841ffce, type: 2}
-      propertyPath: options
-      value: 
-      objectReference: {fileID: 211903719}
     - target: {fileID: 22321880, guid: a3e66d48cd3ccb34daadb0181841ffce, type: 2}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1163847115}
-    - target: {fileID: 11440478, guid: a3e66d48cd3ccb34daadb0181841ffce, type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+    - target: {fileID: 11429808, guid: a3e66d48cd3ccb34daadb0181841ffce, type: 2}
+      propertyPath: options
       value: 
-      objectReference: {fileID: 1971273849}
-    - target: {fileID: 11440478, guid: a3e66d48cd3ccb34daadb0181841ffce, type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OpenHelp
+      objectReference: {fileID: 211903719}
+    - target: {fileID: 22444470, guid: a3e66d48cd3ccb34daadb0181841ffce, type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 156
       objectReference: {fileID: 0}
-    - target: {fileID: 11440478, guid: a3e66d48cd3ccb34daadb0181841ffce, type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
+    - target: {fileID: 22444470, guid: a3e66d48cd3ccb34daadb0181841ffce, type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 46
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a3e66d48cd3ccb34daadb0181841ffce, type: 2}
   m_IsPrefabParent: 0
---- !u!114 &1971273849 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 11429808, guid: a3e66d48cd3ccb34daadb0181841ffce,
-    type: 2}
-  m_PrefabInternal: {fileID: 1971273848}
-  m_Script: {fileID: 11500000, guid: cbabf1f9de93b3b4fb46c90d271eb393, type: 3}

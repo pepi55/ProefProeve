@@ -5,6 +5,7 @@ using System.Collections;
 
 public class MainMenu : MonoBehaviour
 {
+    static bool helpShow;
 
     [SerializeField]
     OptionsMenu options;
@@ -14,8 +15,16 @@ public class MainMenu : MonoBehaviour
 
     void Start()
     {
-        Main.SetActive(true);
-        Help.SetActive(false);
+        if (helpShow)
+        {
+            Main.SetActive(true);
+            Help.SetActive(false);
+        }
+        else
+        {
+            Main.SetActive(false);
+            Help.SetActive(true);
+        }
     }
 
     public void Options(bool open)
@@ -30,7 +39,7 @@ public class MainMenu : MonoBehaviour
 
     public void StartGame()
     {
-        SceneControler.Load("LocalGame");
+        SceneControler.Load("Main");
     }
 
     public void OpenHelp()

@@ -60,6 +60,7 @@ public class EnemyBase : MonoBehaviour
         Action = new EnemyEmptyBehaviour();
         StartLive = System.DateTime.Now;
         target = null;
+        transform.rotation = Quaternion.Euler(0, 180, 0);
     }
 
     private void Update()
@@ -76,6 +77,7 @@ public class EnemyBase : MonoBehaviour
             {
                 Action.DoAction(gameObject);
                 transform.LookAt(target.transform);
+
             }
         }
     }
@@ -93,7 +95,8 @@ public class EnemyBase : MonoBehaviour
         else if (other.tag == "EnemySlow")
         {
             rigidbody.velocity /= 10f;
-            lookForPlayer();
+            // lookForPlayer();
+            Action = new EnemyBasicShoot();
         }
     }
 
