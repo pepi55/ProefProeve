@@ -23,8 +23,9 @@ public class EnemyBase : MonoBehaviour
     new private Rigidbody rigidbody;
     public Rigidbody Rigidbody { get { return rigidbody; } }
     private Color TmpColor;
-    bool removeActive;
-    bool isStunnedNow = false;
+    private bool removeActive;
+    private bool isStunnedNow = false;
+    private GameObject target = null;
 
     public bool IsAlive { get; private set; }
     public bool IsRemoved { get; private set; }
@@ -56,8 +57,9 @@ public class EnemyBase : MonoBehaviour
         //Render.material.color = Color.white;
         gameObject.SetActive(true);
         GetComponent<BoxCollider>().enabled = true;
-        Action = new EnemyBasicShoot();
+        Action = new EnemyEmptyBehaviour();
         StartLive = System.DateTime.Now;
+        target = null;
     }
 
     private void Update()
@@ -70,7 +72,11 @@ public class EnemyBase : MonoBehaviour
         }
         else
         {
-            Action.DoAction(gameObject);
+            if (target != null)
+            {
+                Action.DoAction(gameObject);
+                transform.LookAt(target.transform);
+            }
         }
     }
 
@@ -87,7 +93,26 @@ public class EnemyBase : MonoBehaviour
         else if (other.tag == "EnemySlow")
         {
             rigidbody.velocity /= 10f;
+            lookForPlayer();
         }
+    }
+
+    void lookForPlayer()
+    {
+        int mask = 1 << LayerMask.NameToLayer("Player");
+        RaycastHit[] hits = Physics.BoxCastAll(new Vector3(0, 0, 0), new Vector3(20, 20, 20), Vector3.back, transform.rotation, Mathf.Infinity,mask);
+        GameObject closest = null;
+        float shortest = Mathf.Infinity;
+        foreach(RaycastHit h in hits)
+        {
+            if (Vector3.Distance(transform.position, h.collider.transform.position) < shortest)
+            {
+                closest = h.transform.gameObject;
+                shortest = Vector3.Distance(transform.position, h.collider.transform.position);
+            }
+        }
+
+        target = closest;
     }
 
     public void OnCollisionEnter(Collision collision)
