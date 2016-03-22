@@ -12,9 +12,15 @@ public class Game_UIControler : MonoBehaviour {
 	StatusBar PlayerHealth;
 	[SerializeField]
 	StatusBar SuperAttackChargeBar;
-
+    [SerializeField]
+    UnityEngine.UI.Text ScoreIndicator; 
     [SerializeField]
     GameObject PauseMenu, InGameUI;
+
+    //TMP need to find better place;
+    float score = 0;
+    //tells UI if it's paused;
+    bool paused;
 
 	private float Player;
 	private void Start()
@@ -26,6 +32,17 @@ public class Game_UIControler : MonoBehaviour {
 	{
         PlayerHealth.Value = PlayerLocalBehaviour.PlayerHealth / 100f;
         SuperAttackChargeBar.Value = PlayerLocalBehaviour.UltChargeMeter / 10f;
+
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            Pause();
+        }
+
+        if (!paused)
+        {
+            score += Time.deltaTime / 10f;
+            UpdateScoreIndicator();
+        }
         
 	}
 
@@ -34,6 +51,7 @@ public class Game_UIControler : MonoBehaviour {
         if (onPause != null)
             onPause(true);
 
+        paused = true;
         PauseMenu.SetActive(true);
         InGameUI.SetActive(false);
     }
@@ -42,7 +60,7 @@ public class Game_UIControler : MonoBehaviour {
     {
         if (onPause != null)
             onPause(false);
-
+        paused = false;
         PauseMenu.SetActive(false);
         InGameUI.SetActive(true);
     }
@@ -50,5 +68,17 @@ public class Game_UIControler : MonoBehaviour {
     public void ExitToMain()
     {
         SceneControler.Load("MainMenu");
+    }
+
+    public void UpdateScoreIndicator()
+    {
+        string newText = Mathf.RoundToInt(score).ToString();
+
+        for (int i = newText.Length; i < 3; i++)
+        {
+            newText = "0" + newText;
+        }
+
+        ScoreIndicator.text = "MegaMiles " +newText;
     }
 }
