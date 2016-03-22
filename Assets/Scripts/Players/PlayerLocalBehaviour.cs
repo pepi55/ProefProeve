@@ -121,7 +121,7 @@ public class PlayerLocalBehaviour : MonoBehaviour, IPlayerBehaviour
 				}
 			}
 
-			Debug.Log("Rip Jan");
+			EnemyManager.HitAllEnemies();
 
 			_playerUltActivations[id] = false;
 			UltChargeMeter = 0.0f;
