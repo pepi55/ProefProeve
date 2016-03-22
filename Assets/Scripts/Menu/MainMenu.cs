@@ -19,11 +19,13 @@ public class MainMenu : MonoBehaviour
         {
             Main.SetActive(true);
             Help.SetActive(false);
+            options.CloseMenu();
         }
         else
         {
             Main.SetActive(false);
             Help.SetActive(true);
+            options.CloseMenu();
         }
     }
 

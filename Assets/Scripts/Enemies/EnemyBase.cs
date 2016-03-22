@@ -95,7 +95,7 @@ public class EnemyBase : MonoBehaviour
         else if (other.tag == "EnemySlow")
         {
             rigidbody.velocity /= 10f;
-            // lookForPlayer();
+            lookForPlayer();
             Action = new EnemyBasicShoot();
         }
     }
@@ -132,7 +132,7 @@ public class EnemyBase : MonoBehaviour
 
     public void Remove(float delay)
     {
-        Debug.Log((System.DateTime.Now - StartLive).TotalSeconds);
+       // Debug.Log((System.DateTime.Now - StartLive).TotalSeconds);
         StartCoroutine(RemoveDelay(delay));
     }
 
