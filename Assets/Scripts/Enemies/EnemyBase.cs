@@ -75,9 +75,10 @@ public class EnemyBase : MonoBehaviour
         {
             if (target != null)
             {
-                Action.DoAction(gameObject);
                 transform.LookAt(target.transform);
 
+                if (target.transform.position.z+1 < transform.position.z)
+                    Action.DoAction(gameObject);
             }
         }
     }
