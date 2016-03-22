@@ -7,6 +7,8 @@ using System.Linq;
 
 public class EnemyManager : MonoBehaviour
 {
+    private static EnemyManager instance;
+
 	[SerializeField] private EnemyBase[] spawnableBosses;
 	[SerializeField] private Vector3 spawnMin;
 	[SerializeField] private Vector3 spawnMax;
@@ -25,6 +27,7 @@ public class EnemyManager : MonoBehaviour
 
 	protected void Awake ()
 	{
+        instance = this;
         Game_UIControler.onPause += Game_UIControler_onPause;
 
 		enemyPool = new List<EnemyBase>();
@@ -100,6 +103,17 @@ public class EnemyManager : MonoBehaviour
 		enemy.Rigidbody.velocity = new Vector3(0, 0, -5);
 		enemy.transform.localPosition = RandomPos();
 	}
+
+    public static void HitAllEnemies()
+    {
+        foreach(EnemyBase e in instance.enemyPool)
+        {
+            if (e.IsAlive)
+            {
+                e.isHit();
+            }
+        }
+    }
 
 	private EnemyBase SpawnBoss()
 	{

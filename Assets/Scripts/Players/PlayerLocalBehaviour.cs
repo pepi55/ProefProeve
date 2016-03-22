@@ -75,7 +75,7 @@ public class PlayerLocalBehaviour : MonoBehaviour, IPlayerBehaviour
 
 		if (PlayerHealth <= 0.0f)
 		{
-			Destroy(gameObject);
+            SceneControler.Load("GameOver");
 		}
 	}
 
